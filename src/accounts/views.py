@@ -1,4 +1,5 @@
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
@@ -31,6 +32,7 @@ class CustomLoginView(View):
             return render(request, self.template_name, context)
 
 
+@login_required
 class CustomLogoutView(TemplateView):
     template_name = "accounts/logout.html"
 
