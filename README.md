@@ -10,7 +10,7 @@
 1. [Clone the repository](https://github.com/Ashkaji/ISSEASuiviEnquete.git):
 
 ```bash
-git clone https://github.com/Ashkaji/EnqueteISSEADjango.git
+git clone https://github.com/Ashkaji/ISSEASuiviEnquete.git
 ```
 2. Build the Docker image:
 
