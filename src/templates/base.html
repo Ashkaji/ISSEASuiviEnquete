@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base-style.css' %}">
+    {% block additional-style %}{% endblock additional-style %}
+    {% block scripts %}{% endblock %}
+    <title>{% block title %}Base Html{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% include 'includes/header.html' %}
+    </header>
+    <nav>
+        {% include 'includes/navigation.html' %}
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <aside>
+        {% include 'includes/sidebar.html' %}
+    </aside>
+    <footer>
+        {% include 'includes/footer.html' %}
+    </footer>
+</body>
+</html>

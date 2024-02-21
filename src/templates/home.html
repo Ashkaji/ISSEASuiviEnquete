@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block additional-style %}{% endblock additional-style %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>{{ user.first_name | capfirst }}, u're back!</h1>
+        <p>to the site</p>
+        <a href="{% url 'logout' %}">Se déconnecter</a>
+    {% else %}
+        <h1>Welcome to the site</h1>
+        <a href="{% url 'login' %}">Se connecter</a>
+    {% endif %}
+{% endblock %}
