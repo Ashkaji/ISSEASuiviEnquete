@@ -32,7 +32,6 @@ class CustomLoginView(View):
             return render(request, self.template_name, context)
 
 
-@login_required
 class CustomLogoutView(TemplateView):
     template_name = "accounts/logout.html"
 
