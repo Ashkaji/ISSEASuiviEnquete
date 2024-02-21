@@ -1,4 +1,4 @@
-# Local Setup for EnqueteISSEADjango Project with Docker
+# Local Setup for ISSEASuiviEnquete Project with Docker
 
 ## **Prerequisites:**
 
@@ -7,7 +7,7 @@
 
 ## **Steps:**
 
-1. [Clone the repository](https://github.com/Ashkaji/EnqueteISSEADjango.git):
+1. [Clone the repository](https://github.com/Ashkaji/ISSEASuiviEnquete.git):
 
 ```bash
 git clone https://github.com/Ashkaji/EnqueteISSEADjango.git
