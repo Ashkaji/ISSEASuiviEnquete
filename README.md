@@ -1,6 +1,27 @@
-# Local Setup for ISSEASuiviEnquete Project with Docker
+# Local Setup to contribute to the project
 
 ## **Prerequisites:**
+- [Git installed on your machine](https://git-scm.com/downloads)
+
+## **Steps:**
+
+1. [Clone the repository](https://github.com/Ashkaji/ISSEASuiviEnquete.git) to your local directory:
+
+```bash
+git clone https://github.com/Ashkaji/ISSEASuiviEnquete.git
+```
+
+2. Create python virtual environment and run this commmand:
+
+```
+pip install -r requireements.txt
+````
+
+
+
+# Local Setup for ISSEASuiviEnquete Project with Docker
+
+# **Prerequisites:**
 
 - [Docker installed on your machine](https://docs.docker.com/get-started/)
 - [Git installed on your machine](https://git-scm.com/downloads)
