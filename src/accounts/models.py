@@ -55,46 +55,45 @@ class CustomUser(AbstractUser):
         return f"{self.last_name.lower()}-{self.first_name.lower()}"
 
 
-class Superviseur(CustomUser):
+class Supervisor(CustomUser):
     pass
 
 
-class Etudiant(CustomUser):
-    matricule = models.CharField(max_length=6, unique=True, null=False, blank=False, default='')
-    classe = models.CharField(
+class Student(CustomUser):
+    number = models.CharField(max_length=6, unique=True, null=False, blank=False, default='')  # "matricule" translated to "registration_number"
+    grade = models.CharField(  # "classe" translated to "class_field"
         choices=[
-            ('AS1', 'AS 1ere annee'),
-            ('AS2', 'AS 2e annee'),
-            ('ISEL1', 'ISE Long 1ere annee'),
-            ('ISEL2', 'ISE Long 2e annee'),
-            ('ISEL3', 'ISE Long 3e annee'),
-            ('ISE1-ECO', 'ISE1 Economie'),
+            ('AS1', 'AS 1st Year'),
+            ('AS2', 'AS 2nd Year'),
+            ('ISEL1', 'ISE Long 1st Year'),
+            ('ISEL2', 'ISE Long 2nd Year'),
+            ('ISEL3', 'ISE Long 3rd Year'),
+            ('ISE1-ECO', 'ISE1 Economics'),
             ('ISE1-MATHS', 'ISE1-MATHS'),
-            ('ISE2', 'ISE 2e annee'),
+            ('ISE2', 'ISE 2nd Year'),
         ],
         max_length=15,
         null=False,
         blank=False,
         default=''
     )
-    sexe = models.CharField(
-        choices=[('F', 'Feminin'), ('M', 'Masculin')],
+    gender = models.CharField(
+        choices=[('F', 'Female'), ('M', 'Male')],
         max_length=1,
         default=''
-    )
-    nationnalite = models.CharField(max_length=10, default='')
-
+    )  # "sexe" translated to "gender"
+    nationality = models.CharField(max_length=10, default='')
     class Meta:
         abstract = True
 
 
-class Enqueteur(Etudiant):
+class Interviewer(Student):
     pass
 
 
-class Controleur(Etudiant):
+class Controller(Student):
     pass
 
 
-class SupersiveurAssistant(Etudiant):
+class SubSupervisor(Student):
     pass

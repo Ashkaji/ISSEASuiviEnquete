@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from accounts.models import CustomUser, Superviseur, Enqueteur, Controleur, SupersiveurAssistant
+from accounts.models import CustomUser, Supervisor, SubSupervisor, Controller, Interviewer
 
 
 # Register your models here.
@@ -14,8 +14,8 @@ class CustomUserAdmin(admin.ModelAdmin):
     empty_value_display = 'unknown'
 
 
-@admin.register(Superviseur)
-class SuperviseurAdmin(admin.ModelAdmin):
+@admin.register(Supervisor)
+class SupervisorAdmin(admin.ModelAdmin):
     list_display = (
         'username',
         'last_name',
@@ -25,46 +25,46 @@ class SuperviseurAdmin(admin.ModelAdmin):
     empty_value_display = 'unknown'
 
 
-@admin.register(Enqueteur)
-class EnqueteurAdmin(admin.ModelAdmin):
+@admin.register(SubSupervisor)
+class SubSupervisorAdmin(admin.ModelAdmin):
     list_display = (
         'username',
-        'matricule',
+        'number',
         'last_name',
         'first_name',
-        'classe',
-        'sexe',
-        'nationnalite',
+        'grade',
+        'gender',
+        'nationality',
     )
     list_per_page = 50
     empty_value_display = 'unknown'
 
 
-@admin.register(Controleur)
-class ControleurAdmin(admin.ModelAdmin):
+@admin.register(Controller)
+class ControllerAdmin(admin.ModelAdmin):
     list_display = (
         'username',
-        'matricule',
+        'number',
         'last_name',
         'first_name',
-        'classe',
-        'sexe',
-        'nationnalite',
+        'grade',
+        'gender',
+        'nationality',
     )
     list_per_page = 50
     empty_value_display = 'unknown'
 
 
-@admin.register(SupersiveurAssistant)
-class SupersiveurAssistantAdmin(admin.ModelAdmin):
+@admin.register(Interviewer)
+class InterviewerAdmin(admin.ModelAdmin):
     list_display = (
         'username',
-        'matricule',
+        'number',
         'last_name',
         'first_name',
-        'classe',
-        'sexe',
-        'nationnalite',
+        'grade',
+        'gender',
+        'nationality',
     )
     list_per_page = 50
     empty_value_display = 'unknown'
