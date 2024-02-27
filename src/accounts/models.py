@@ -60,8 +60,8 @@ class Supervisor(CustomUser):
 
 
 class Student(CustomUser):
-    number = models.CharField(max_length=6, unique=True, null=False, blank=False, default='')  # "matricule" translated to "registration_number"
-    grade = models.CharField(  # "classe" translated to "class_field"
+    number = models.CharField(max_length=6, unique=True, null=False, blank=False, default='')
+    grade = models.CharField(
         choices=[
             ('AS1', 'AS 1st Year'),
             ('AS2', 'AS 2nd Year'),
@@ -81,8 +81,9 @@ class Student(CustomUser):
         choices=[('F', 'Female'), ('M', 'Male')],
         max_length=1,
         default=''
-    )  # "sexe" translated to "gender"
+    )
     nationality = models.CharField(max_length=10, default='')
+
     class Meta:
         abstract = True
 
