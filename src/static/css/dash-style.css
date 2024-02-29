@@ -1,0 +1,66 @@
+header {
+	margin: 20px 1%;
+}
+
+header h1 {
+	font-weight: 400;
+	margin: 20px 0;
+}
+
+h2 {
+	font-size: 2em;
+	font-weight: 400;
+}
+
+div.metrics-section,
+div.plots-section{
+    display: flex;
+    flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+div.plot-block {
+    flex: 1 0 45%; /* Each item takes up 50% of the width (2 items per row) */
+    padding: 20px;
+	margin: 10px 1%;
+	height: 300px;
+	border-radius: 15px;
+	box-sizing: border-box;
+	background: white;
+}
+
+div.metric-block {
+    flex: 1 0 22%; /* Each item takes up 50% of the width (2 items per row) */
+    padding: 20px;
+    box-sizing: border-box;
+	margin: 10px 1%;
+	border-radius: 15px;
+	background: white;
+	transition: all 0.4s ease;
+}
+
+div.metric-block:hover {
+	background-color: var(--blue-color);
+	color: var(--slight-grey-color);
+}
+
+div.metric-block:hover,
+div.plot-block:hover {
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+div.geographic-section {
+    padding: 20px;
+    box-sizing: border-box;
+	margin: 10px 1%;
+	border-radius: 15px;
+	background: white;
+	height: 400px;
+	transition: 0.2s ease;
+}
+
+@media (max-width: 640px) {
+    div.plot-block, div.metric-block {
+        flex: 1 0 90%; /* Each item takes up 100% width on smaller screens (1 item per row) */
+    }
+}

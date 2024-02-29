@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block additional-style %}
+    <link rel="stylesheet" href="{% static 'css/dash-style.css' %}">
+{% endblock additional-style %}
+
+{% block header %}
+    <h1>Bienvenu dans votre tableau de bord!</h1>
+    <p>Vous trouverez toutes les informations dont vous avez besoin pour une meilleure collecte</p>
+{% endblock %}
+
+{% block content %}
+        <div class = "metrics-section">
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class = "plots-section">
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+        </div>
+
+        <div class = "geographic-section color-changing-element">
+            <h5 class = "plot-title">Position géographique des ménages à enquêter</h5>
+            <div class = "geographic-plot">
+
+            </div>
+        </div>
+{% endblock %}
+
+{% block additional-scripts %}
+    <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

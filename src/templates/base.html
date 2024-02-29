@@ -5,24 +5,30 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base-style.css' %}">
     {% block additional-style %}{% endblock additional-style %}
-    {% block scripts %}{% endblock %}
     <title>{% block title %}Base Html{% endblock %}</title>
 </head>
 <body>
-    <header>
-        {% include 'includes/header.html' %}
-    </header>
-    <nav>
+
+    <nav class="tag-color-changing">
         {% include 'includes/navigation.html' %}
     </nav>
+
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+
     <main>
         {% block content %}{% endblock %}
     </main>
-    <aside>
-        {% include 'includes/sidebar.html' %}
-    </aside>
-    <footer>
+
+{#    <aside>#}
+{#        {% include 'includes/sidebar.html' %}#}
+{#    </aside>#}
+
+    <footer class="tag-color-changing">
         {% include 'includes/footer.html' %}
     </footer>
+    <script type="text/javascript" src="{% static 'js/base-js.js' %}"></script>
+    {% block additional-scripts %}{% endblock %}
 </body>
 </html>

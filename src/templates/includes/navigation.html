@@ -1,0 +1,19 @@
+    <label class="switch">
+		<input type="checkbox" id="toggle">
+        <span class="slider round"></span>
+    </label>
+
+    <ul class = "nav-links">
+        <li><a href ="#">Home</a></li>
+        <li><a href ="#">About</a></li>
+        <li><a href ="#">Support</a></li>
+        <li><a href ="#">Forum</a></li>
+    </ul>
+
+	<div class="burger">&#9776;</div>
+
+    {% if user.is_authenticated %}
+    <div class="login-circle color-changing-element">
+        <span id="initial">{{ user.username | upper | slice:'0:1'}}</span>
+    </div>
+    {% endif %}

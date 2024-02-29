@@ -20,6 +20,8 @@ from django.views.generic import TemplateView
 
 from accounts.views import HomeView, CustomLoginView, CustomLogoutView
 
+from dashboard.views import dashboard_view
+
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     # ----------------------------------------------------------------------------------------------
@@ -27,6 +29,8 @@ urlpatterns = [
     path('accounts/logout/', CustomLogoutView.as_view(), name='logout'),
     path('accounts/help-for-login', TemplateView.as_view(
         template_name='accounts/help-for-login.html'), name='help-for-login'),
+    # ----------------------------------------------------------------------------------------------
+    path('dashboard/', dashboard_view, name='dashboard'),
     # ----------------------------------------------------------------------------------------------
     path('admin/', admin.site.urls),
 ]
