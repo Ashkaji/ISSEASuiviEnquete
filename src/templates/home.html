@@ -6,11 +6,11 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h1>Welcome bro, u're back!</h1>
-        <p>to the site</p>
-        <a href="{% url 'logout' %}">Se déconnecter</a>
+        <h1>Welcome {{ user.username | capfirst }}, u're back!</h1>
     {% else %}
-        <h1>Welcome to the site</h1>
-        <a href="{% url 'login' %}">Se connecter</a>
+        <h1>Welcome</h1>
+        <div class="text-container">
+            {% lorem 3 p %}
+        </div>
     {% endif %}
 {% endblock %}

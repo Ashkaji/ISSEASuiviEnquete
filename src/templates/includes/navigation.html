@@ -4,16 +4,22 @@
     </label>
 
     <ul class = "nav-links">
-        <li><a href ="#">Home</a></li>
-        <li><a href ="#">About</a></li>
-        <li><a href ="#">Support</a></li>
-        <li><a href ="#">Forum</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'support' %}">Support</a></li>
+        <li><a href="{% url 'forum' %}">Forum</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        {% endif %}
     </ul>
 
 	<div class="burger">&#9776;</div>
 
     {% if user.is_authenticated %}
-    <div class="login-circle color-changing-element">
-        <span id="initial">{{ user.username | upper | slice:'0:1'}}</span>
-    </div>
+        <a class="logout-display" href="{% url 'logout' %}">Se déconnecter</a>
+        <div class="login-circle color-changing-element">
+            <span id="initial">{{ user.username | upper | slice:'0:1' }}</span>
+        </div>
+    {% else %}
+        <a href="{% url 'login' %}">Se connecter</a>
     {% endif %}

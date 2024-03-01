@@ -24,10 +24,13 @@ from dashboard.views import dashboard_view
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('support/', TemplateView.as_view(template_name='support.html'), name='support'),
+    path('forum/', TemplateView.as_view(template_name='forum.html'), name='forum'),
     # ----------------------------------------------------------------------------------------------
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('accounts/logout/', CustomLogoutView.as_view(), name='logout'),
-    path('accounts/help-for-login', TemplateView.as_view(
+    path('accounts/help-for-login/', TemplateView.as_view(
         template_name='accounts/help-for-login.html'), name='help-for-login'),
     # ----------------------------------------------------------------------------------------------
     path('dashboard/', dashboard_view, name='dashboard'),
