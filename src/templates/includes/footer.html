@@ -1,12 +1,18 @@
 <div class="footer-container">
     <div class="footer-logo">Company Logo</div>
     <div class="footer-links">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="{% url 'support' %}">Services</a>
+    </div>
+    <div class="company-info">
+        <h3>Contact Us:</h3>
+        <p>B.P.294, Yaoundé (République du Cameroun)</p>
+        <p>Tél. (237) 222-22-01-34 Fax (237) 222-22-95-21</p>
+        <p>email : isseacemac@yahoo.fr<br>Web : <a href="https://www.issea-cemac.org" target="_blank">www.issea-cemac.org</a></p>
     </div>
     <div class="social-icons">
+        <a href="#"><svg class="icon" viewBox="0 0 16 16"></svg></a>
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>

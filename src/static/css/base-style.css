@@ -80,6 +80,11 @@ nav ul:hover a:hover {
     font-weight: bold;
 }
 
+.text-container p {
+  margin-bottom: 1rem; /* Adjust the value for desired spacing */
+  margin-right: 20px;
+}
+
 .switch {
     position: relative;
     width: 60px;
@@ -167,17 +172,29 @@ footer {
     color: #FFD700;
 }
 
+/* New styles for the company info */
+.company-info {
+    text-align: justify; /* Adjust text alignment as needed */
+    margin-top: 10px; /* Optional spacing  */
+}
+
+.company-info p {
+    margin-bottom: 5px; /* Adjust spacing between lines as needed */
+}
+
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
         text-align: center;
     }
 
-    .footer-links, .social-icons {
+    .footer-links,
+    .social-icons,
+    .company-info {
         margin-top: 10px;
     }
 
-	nav .nav-links {
+    nav .nav-links {
         display: none;
     }
 
