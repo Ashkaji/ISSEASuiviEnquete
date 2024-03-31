@@ -24,6 +24,12 @@ SECRET_KEY = 'django-insecure-c$me!b&)-uk3_w1u)pn*maa3_ml+6-48ch7(wxk02044hvthq8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# SSAW API Credentials (I have to replace it with actual values)
+SSAW_API_URL = 'https://your-ssaw-api-url'
+SSAW_API_USER = 'your_api_user'
+SSAW_API_PASSWORD = 'your_api_password'
+SSAW_WORKSPACE = 'your_workspace'
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -37,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
+    'surveys',
 ]
 
 MIDDLEWARE = [
