@@ -91,6 +91,25 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        self.add_bloc_to_section(section_type='metrics', section_rank=0, bloc_rank=0, title='Charge de travail',
+                                 icon='', value=10, unit='Ménage(s)')
+        self.add_bloc_to_section(section_type='metrics', section_rank=0, bloc_rank=1, title='Charge de travail',
+                                 icon='', value=12, unit='Ménage(s)')
+        self.add_bloc_to_section(section_type='metrics', section_rank=0, bloc_rank=2, title='Charge de travail',
+                                 icon='', value=10, unit='Ménage(s)')
+
+        self.add_bloc_to_section(section_type='plots', section_rank=0, bloc_rank=0,
+                                 title='Evolution du nombre de ménages enquêtés par jour', plot='')
+        self.add_bloc_to_section(section_type='plots', section_rank=0, bloc_rank=1,
+                                 title='Evolution du nombre de ménages enquêtés par jour', plot='') 
+        self.add_bloc_to_section(section_type='plots', section_rank=1, bloc_rank=0,
+                                 title='Evolution du nombre de ménages enquêtés par jour', plot='')
+        self.add_bloc_to_section(section_type='plots', section_rank=1, bloc_rank=0,
+                                 title='Evolution du nombre de ménages enquêtés par jour', plot='')
+
+        self.add_bloc_to_section(section_type='geographic', section_rank=0, bloc_rank=0,
+                                 title='Position géographique des ménages à enquêter', plot='')
+
         context['header_message'] = self.header_message
         context['metric_sections'] = self.sections_data['metrics']
         context['plot_sections'] = self.sections_data['plots']
