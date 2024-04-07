@@ -1,5 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 
 
@@ -56,7 +56,10 @@ class CustomUser(AbstractUser):
 
 
 class Supervisor(CustomUser):
-    pass
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        group_controllers = Group.objects.get(name='Supervisors')
+        self.groups.add(group_controllers)
 
 
 class Student(CustomUser):
@@ -89,12 +92,21 @@ class Student(CustomUser):
 
 
 class Interviewer(Student):
-    pass
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        group_interviewers = Group.objects.get(name='Interviewers')
+        self.groups.add(group_interviewers)
 
 
 class Controller(Student):
-    pass
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        group_controllers = Group.objects.get(name='Controllers')
+        self.groups.add(group_controllers)
 
 
 class SubSupervisor(Student):
-    pass
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        group_controllers = Group.objects.get(name='SubSupervisors')
+        self.groups.add(group_controllers)

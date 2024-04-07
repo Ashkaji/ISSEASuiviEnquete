@@ -1,4 +1,4 @@
-# swagger_client.QuestionnairesApi
+# client.QuestionnairesApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -22,16 +22,16 @@ Gets list of imported questionnaires
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 limit = 10 # int | Limit number of returned rows. Max allowed value is 40 (optional) (default to 10)
 offset = 1 # int | Page number starting from 1. Actual skipped rows are calculated as `(offset - 1) * limit` (optional) (default to 1)
 
@@ -74,16 +74,16 @@ Gets list of imported questionnaires by questionnaire id
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Questionnaire Id
 limit = 10 # int | Limit number of returned rows. Max allowed value is 40 (optional) (default to 10)
 offset = 1 # int | Page number starting from 1. Actual skipped rows are calculated as `(offset - 1) * limit` (optional) (default to 1)
@@ -128,16 +128,16 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 version = 789 # int | 
 
@@ -178,16 +178,16 @@ Gets imported questionnaire by id and version
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Questionnaire Id
 version = 789 # int | Questionnaire version
 
@@ -230,16 +230,16 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 version = 789 # int | 
 limit = 10 # int |  (optional) (default to 10)
@@ -285,16 +285,16 @@ Gets list of possible interview statuses
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 
 try:
     # Gets list of possible interview statuses
@@ -331,16 +331,16 @@ Gets audio recording enabled setting for provided questionnaire
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Questionnaire guid
 version = 789 # int | Questionnaire version
 
@@ -383,17 +383,17 @@ Sets audio recording enabled setting for provided questionnaire
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.QuestionnairesApi(swagger_client.ApiClient(configuration))
-body = swagger_client.RecordAudioRequest() # RecordAudioRequest | 
+api_instance = client.QuestionnairesApi(client.ApiClient(configuration))
+body = client.RecordAudioRequest() # RecordAudioRequest | 
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Questionnaire guid
 version = 789 # int | Questionnaire version
 

@@ -1,4 +1,4 @@
-# swagger_client.StatisticsApi
+# client.StatisticsApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -17,22 +17,22 @@ Generate report report based on provided query paramters.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.StatisticsApi(swagger_client.ApiClient(configuration))
+api_instance = client.StatisticsApi(client.ApiClient(configuration))
 questionnaire_id = 'questionnaire_id_example' # str | Questionnaire Id
 question = 'question_example' # str | Question variable name or UUID
 version = 789 # int | Questionnaire version (optional)
 min = 56 # int | Minimum value of answers to count in report (optional)
 max = 56 # int | Maximum value of answers to count in report (optional)
-export_type = swagger_client.ExportFileType() # ExportFileType | Specify report format to ouput (optional)
+export_type = client.ExportFileType() # ExportFileType | Specify report format to ouput (optional)
 conditional_question = 'conditional_question_example' # str | Condition question variable name or UUID (optional)
 condition = [56] # list[int] | List of condition question answers to filter on (optional)
 pivot = true # bool | Specify `true` if Pivot Table output needed. (optional)
@@ -41,10 +41,10 @@ statuses = ['statuses_example'] # list[str] | List of statuses to apply filterin
 draw = 56 # int | Datatables specific (optional)
 start = 56 # int | Paging - Start row (optional)
 length = 56 # int | How many rows per page (optional)
-order = [swagger_client.SortOrder()] # list[SortOrder] | order of output (optional)
-c = [swagger_client.ColumnInfo()] # list[ColumnInfo] | This is shorthand for `Columns` property. DataTable works via Get requests (optional)
-columns = [swagger_client.ColumnInfo()] # list[ColumnInfo] | List of columns that need to be outputed. Leave null for default values (optional)
-colummns_list = [swagger_client.ColumnInfo()] # list[ColumnInfo] |  (optional)
+order = [client.SortOrder()] # list[SortOrder] | order of output (optional)
+c = [client.ColumnInfo()] # list[ColumnInfo] | This is shorthand for `Columns` property. DataTable works via Get requests (optional)
+columns = [client.ColumnInfo()] # list[ColumnInfo] | List of columns that need to be outputed. Leave null for default values (optional)
+colummns_list = [client.ColumnInfo()] # list[ColumnInfo] |  (optional)
 search_value = 'search_value_example' # str |  (optional)
 search_regex = true # bool |  (optional)
 page_index = 56 # int |  (optional)
@@ -108,16 +108,16 @@ void (empty response body)
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.StatisticsApi(swagger_client.ApiClient(configuration))
+api_instance = client.StatisticsApi(client.ApiClient(configuration))
 
 try:
     api_response = api_instance.api_v1_statistics_questionnaires_get()
@@ -155,16 +155,16 @@ Gets a questions list for specified questionnaire identity. Only questions that 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.StatisticsApi(swagger_client.ApiClient(configuration))
+api_instance = client.StatisticsApi(client.ApiClient(configuration))
 questionnaire_id = 'questionnaire_id_example' # str | Questionnaire Id (optional)
 version = 789 # int | Questionnaire version (optional)
 

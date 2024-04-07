@@ -23,7 +23,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import swagger_client 
+import client 
 ```
 
 ### Setuptools
@@ -37,7 +37,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import swagger_client
+import client
 ```
 
 ## Getting Started
@@ -47,16 +47,16 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from client.rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 search_by = 'search_by_example' # str | Filter result by custom search query (optional)
 questionnaire_id = 'questionnaire_id_example' # str | Questionnaire Id in format of `{QuestionnaireId}${Version}` (optional)
 responsible = 'responsible_example' # str | Responsible user Id on name (optional)
@@ -73,12 +73,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_get: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -88,13 +88,13 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_archive_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AssignmentAssignRequest() # AssignmentAssignRequest | Responsible user id or name
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
+body = client.AssignmentAssignRequest() # AssignmentAssignRequest | Responsible user id or name
 id = 56 # int | Assignment id
 
 try:
@@ -104,12 +104,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_assign_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -119,12 +119,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_assignment_quantity_settings_get: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 body = 56 # int | New limit on created interviews (optional)
 
@@ -135,12 +135,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_change_quantity_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -150,12 +150,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_close_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | 
 
 try:
@@ -163,12 +163,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_close_post: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | 
 
 try:
@@ -178,12 +178,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_get: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 start = 0 # int |  (optional) (default to 0)
 length = 30 # int | Limit of events to return (optional) (default to 30)
@@ -195,12 +195,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_history_get: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -210,14 +210,14 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_record_audio_get: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
-body = swagger_client.UpdateRecordingRequest() # UpdateRecordingRequest |  (optional)
+body = client.UpdateRecordingRequest() # UpdateRecordingRequest |  (optional)
 
 try:
     # Set audio recording setting for assignment
@@ -225,12 +225,12 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_record_audio_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -240,13 +240,13 @@ try:
 except ApiException as e:
     print("Exception when calling AssignmentsApi->api_v1_assignments_id_unarchive_patch: %s\n" % e)
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.CreateAssignmentApiRequest() # CreateAssignmentApiRequest | New assignments options
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
+body = client.CreateAssignmentApiRequest() # CreateAssignmentApiRequest | New assignments options
 
 try:
     # Create new assignment

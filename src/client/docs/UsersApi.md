@@ -1,4 +1,4 @@
-# swagger_client.UsersApi
+# client.UsersApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -23,16 +23,16 @@ Returns audit log records for interviewer.  You can specify \"start\" and \"end\
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | User id
 start = '2013-10-20T19:20:30+01:00' # datetime | Start datetime. If isn't specified then return data for last 7 days. (optional)
 end = '2013-10-20T19:20:30+01:00' # datetime | End datetime. If isn't specified then get data for 7 days from start data. (optional)
@@ -77,16 +77,16 @@ Gets detailed info about single interviewer
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | User id
 
 try:
@@ -127,16 +127,16 @@ Gets list of supervisors
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 limit = 10 # int |  (optional) (default to 10)
 offset = 1 # int |  (optional) (default to 1)
 
@@ -179,16 +179,16 @@ Gets detailed info about single supervisor
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = 'id_example' # str | User id or user name or user email
 
 try:
@@ -229,16 +229,16 @@ Gets list of interviewers in the specific supervisor team
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 supervisor_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Id of supervisor
 limit = 10 # int |  (optional) (default to 10)
 offset = 1 # int |  (optional) (default to 1)
@@ -283,16 +283,16 @@ Archives interviewer or supervisor with all his interviewers
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = 'id_example' # str | User id
 
 try:
@@ -332,16 +332,16 @@ Gets detailed info about single user
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = 'id_example' # str | User id or user name or user email
 
 try:
@@ -382,16 +382,16 @@ Unarchives single user
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
+api_instance = client.UsersApi(client.ApiClient(configuration))
 id = 'id_example' # str | User id
 
 try:
@@ -431,17 +431,17 @@ Creates new user with specified role.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.UsersApi(swagger_client.ApiClient(configuration))
-body = swagger_client.RegisterUserModel() # RegisterUserModel | 
+api_instance = client.UsersApi(client.ApiClient(configuration))
+body = client.RegisterUserModel() # RegisterUserModel | 
 
 try:
     # Creates new user with specified role.

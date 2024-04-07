@@ -1,4 +1,4 @@
-# swagger_client.WorkspacesApi
+# client.WorkspacesApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -23,17 +23,17 @@ Assigns workspaces to user.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AssignWorkspacesToUserModel() # AssignWorkspacesToUserModel |  (optional)
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
+body = client.AssignWorkspacesToUserModel() # AssignWorkspacesToUserModel |  (optional)
 
 try:
     # Assigns workspaces to user.
@@ -72,25 +72,25 @@ List existing workspaces
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 start = 56 # int |  (optional)
 length = 56 # int |  (optional)
 user_id = 'user_id_example' # str | Return only workspaces assigned to specified user (optional)
 include_disabled = true # bool | Returned list will also include disabled workspaces (optional)
 draw = 56 # int | Datatables specific (optional)
-order = [swagger_client.SortOrder()] # list[SortOrder] | order of output (optional)
-c = [swagger_client.ColumnInfo()] # list[ColumnInfo] | This is shorthand for `Columns` property. DataTable works via Get requests (optional)
-columns = [swagger_client.ColumnInfo()] # list[ColumnInfo] | List of columns that need to be outputed. Leave null for default values (optional)
-colummns_list = [swagger_client.ColumnInfo()] # list[ColumnInfo] |  (optional)
+order = [client.SortOrder()] # list[SortOrder] | order of output (optional)
+c = [client.ColumnInfo()] # list[ColumnInfo] | This is shorthand for `Columns` property. DataTable works via Get requests (optional)
+columns = [client.ColumnInfo()] # list[ColumnInfo] | List of columns that need to be outputed. Leave null for default values (optional)
+colummns_list = [client.ColumnInfo()] # list[ColumnInfo] |  (optional)
 search_value = 'search_value_example' # str |  (optional)
 search_regex = true # bool |  (optional)
 page_index = 56 # int |  (optional)
@@ -146,16 +146,16 @@ Delete workspace
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | Workspace name
 
 try:
@@ -196,16 +196,16 @@ Disables specified workspace
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | 
 
 try:
@@ -245,16 +245,16 @@ Enables specified workspace
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | 
 
 try:
@@ -294,16 +294,16 @@ Get single workspace details
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | 
 
 try:
@@ -344,18 +344,18 @@ Updates workspace
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | 
-body = swagger_client.WorkspaceUpdateApiView() # WorkspaceUpdateApiView |  (optional)
+body = client.WorkspaceUpdateApiView() # WorkspaceUpdateApiView |  (optional)
 
 try:
     # Updates workspace
@@ -395,17 +395,17 @@ Creates new workspace. Accessible only to administrator
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
-body = swagger_client.WorkspaceCreateApiView() # WorkspaceCreateApiView |  (optional)
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
+body = client.WorkspaceCreateApiView() # WorkspaceCreateApiView |  (optional)
 
 try:
     # Creates new workspace. Accessible only to administrator
@@ -445,16 +445,16 @@ Request server for information about workspace status and it's ability to delete
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkspacesApi(swagger_client.ApiClient(configuration))
+api_instance = client.WorkspacesApi(client.ApiClient(configuration))
 name = 'name_example' # str | Workspace name
 
 try:

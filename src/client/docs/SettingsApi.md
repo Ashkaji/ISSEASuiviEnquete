@@ -1,4 +1,4 @@
-# swagger_client.SettingsApi
+# client.SettingsApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -17,16 +17,16 @@ Remove global notice for the headquarters application
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.SettingsApi(swagger_client.ApiClient(configuration))
+api_instance = client.SettingsApi(client.ApiClient(configuration))
 
 try:
     # Remove global notice for the headquarters application
@@ -62,16 +62,16 @@ Get global notice for the headquarters application
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.SettingsApi(swagger_client.ApiClient(configuration))
+api_instance = client.SettingsApi(client.ApiClient(configuration))
 
 try:
     # Get global notice for the headquarters application
@@ -108,17 +108,17 @@ Set global notice for the headquarters application
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.SettingsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.SetGlobalNoticeApiModel() # SetGlobalNoticeApiModel | 
+api_instance = client.SettingsApi(client.ApiClient(configuration))
+body = client.SetGlobalNoticeApiModel() # SetGlobalNoticeApiModel | 
 
 try:
     # Set global notice for the headquarters application

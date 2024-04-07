@@ -1,4 +1,4 @@
-# swagger_client.InterviewsApi
+# client.InterviewsApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -29,19 +29,19 @@ Gets list of interviews existing in the system
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 questionnaire_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Questionnaire id if filtering by this field is required (optional)
 questionnaire_version = 789 # int | Questionnaire id if filtering by this field is required (optional)
-status = swagger_client.InterviewStatus() # InterviewStatus | Filtering by interview status (optional)
+status = client.InterviewStatus() # InterviewStatus | Filtering by interview status (optional)
 interview_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests (optional)
 page_size = 10 # int | Page size (optional) (default to 10)
 page = 1 # int | Page number (starting from 1) (optional) (default to 1)
@@ -89,16 +89,16 @@ Approves interview
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 comment = 'comment_example' # str | Approval comment (optional)
 
@@ -140,17 +140,17 @@ Assigns interview to interviewer
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AssignChangeApiModel() # AssignChangeApiModel | Responsible id or responsible name
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
+body = client.AssignChangeApiModel() # AssignChangeApiModel | Responsible id or responsible name
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 
 try:
@@ -191,17 +191,17 @@ Assigns supervisor
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AssignChangeApiModel() # AssignChangeApiModel | 
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
+body = client.AssignChangeApiModel() # AssignChangeApiModel | 
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 
 try:
@@ -242,16 +242,16 @@ Leave a comment on a question using questionnaire variable name and roster vecto
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 variable = 'variable_example' # str | Variable name. This is the variable name for a question in Designer or in an export file
 comment = 'comment_example' # str | Comment. Comment to be posted to the chosen question
@@ -297,16 +297,16 @@ Leave a comment on a question
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 question_id = 'question_id_example' # str | Question Id. Identifier of the question constructed as follows. First, take the question GUID from the JSON version of the questionnaire. Then, remove all dashes. If the question is not in a roster, use this as the question Id. If the question is in a roster, append its address to the question Id using the following pattern : [questionId]_#-#-#, where [questionId] is the question GUID without dashes, # represents the row code of each roster from the top level of the questionnaire to the current question, and only the needed number of row codes is used (e.g., a question in a second-level roster needs 2 row codes, a question in a first-level roster only 1)
 comment = 'comment_example' # str | Comment. Comment to be posted to the chosen question
@@ -350,16 +350,16 @@ Deletes interview
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 
 try:
@@ -399,16 +399,16 @@ Gets all the answers for given interview
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 
 try:
@@ -449,16 +449,16 @@ Get interview history
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview id
 
 try:
@@ -499,16 +499,16 @@ Approves interview as headquarters
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 comment = 'comment_example' # str | Approve comment (optional)
 
@@ -550,16 +550,16 @@ Rejects interview as headquarters
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 comment = 'comment_example' # str | Rejection comment (optional)
 responsible_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | New responsible id (optional)
@@ -603,16 +603,16 @@ Rejects interview from Approved by headquarters status
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 comment = 'comment_example' # str | Approve comment (optional)
 
@@ -654,16 +654,16 @@ Get interview transcript in pdf file
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview id
 
 try:
@@ -703,16 +703,16 @@ Rejects interview as supervisor
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview Id. This corresponds to the interview__id variable in data export files or the interview Id obtained through other API requests
 comment = 'comment_example' # str | Rejection comment (optional)
 responsible_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | New responsible id (optional)
@@ -756,16 +756,16 @@ Get statistics by interview
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.InterviewsApi(swagger_client.ApiClient(configuration))
+api_instance = client.InterviewsApi(client.ApiClient(configuration))
 id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | Interview id
 
 try:

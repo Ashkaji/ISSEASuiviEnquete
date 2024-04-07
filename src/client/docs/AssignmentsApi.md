@@ -1,4 +1,4 @@
-# swagger_client.AssignmentsApi
+# client.AssignmentsApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -27,16 +27,16 @@ List all assignments with filtering
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 search_by = 'search_by_example' # str | Filter result by custom search query (optional)
 questionnaire_id = 'questionnaire_id_example' # str | Questionnaire Id in format of `{QuestionnaireId}${Version}` (optional)
 responsible = 'responsible_example' # str | Responsible user Id on name (optional)
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
  **search_by** | **str**| Filter result by custom search query | [optional] 
  **questionnaire_id** | **str**| Questionnaire Id in format of &#x60;{QuestionnaireId}${Version}&#x60; | [optional] 
  **responsible** | **str**| Responsible user Id on name | [optional] 
- **supervisor_id** | [**str**](.md)| Supervisor id | [optional] 
+ **supervisor_id** | **str**| Supervisor id | [optional] 
  **show_archive** | **bool**| Search for only archived assignments | [optional] 
  **order** | **str**| Possible values are  Id, ResponsibleName, InterviewsCount, Quantity, UpdatedAtUtc, CreatedAtUtc  Followed by ordering direction \&quot;ASC\&quot; or \&quot;DESC\&quot; | [optional] 
  **offset** | **int**|  | [optional] 
@@ -91,16 +91,16 @@ Archive assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -141,17 +141,17 @@ Assign new responsible person for assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.AssignmentAssignRequest() # AssignmentAssignRequest | Responsible user id or name
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
+body = client.AssignmentAssignRequest() # AssignmentAssignRequest | Responsible user id or name
 id = 56 # int | Assignment id
 
 try:
@@ -193,16 +193,16 @@ Gets Quantity Settings for provided assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -243,16 +243,16 @@ Change assignments limit on created interviews
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 body = 56 # int | New limit on created interviews (optional)
 
@@ -295,16 +295,16 @@ Close assignment by setting Size to the amount of collected interviews
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -345,16 +345,16 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | 
 
 try:
@@ -393,16 +393,16 @@ Single assignment details
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | 
 
 try:
@@ -443,16 +443,16 @@ Gets history of the assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 start = 0 # int |  (optional) (default to 0)
 length = 30 # int | Limit of events to return (optional) (default to 30)
@@ -497,16 +497,16 @@ Get status of audio recording for provided assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -547,18 +547,18 @@ Set audio recording setting for assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
-body = swagger_client.UpdateRecordingRequest() # UpdateRecordingRequest |  (optional)
+body = client.UpdateRecordingRequest() # UpdateRecordingRequest |  (optional)
 
 try:
     # Set audio recording setting for assignment
@@ -598,16 +598,16 @@ Unarchive assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
 id = 56 # int | Assignment id
 
 try:
@@ -648,17 +648,17 @@ Create new assignment
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
-body = swagger_client.CreateAssignmentApiRequest() # CreateAssignmentApiRequest | New assignments options
+api_instance = client.AssignmentsApi(client.ApiClient(configuration))
+body = client.CreateAssignmentApiRequest() # CreateAssignmentApiRequest | New assignments options
 
 try:
     # Create new assignment

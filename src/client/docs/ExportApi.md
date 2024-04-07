@@ -1,4 +1,4 @@
-# swagger_client.ExportApi
+# client.ExportApi
 
 All URIs are relative to *https://api.myserver.com*
 
@@ -19,20 +19,20 @@ Get list of export processes
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.ExportApi(swagger_client.ApiClient(configuration))
-export_type = swagger_client.ExportType() # ExportType | Format of export data to download (optional)
-interview_status = swagger_client.ExportInterviewType() # ExportInterviewType | Status of exported interviews (optional)
+api_instance = client.ExportApi(client.ApiClient(configuration))
+export_type = client.ExportType() # ExportType | Format of export data to download (optional)
+interview_status = client.ExportInterviewType() # ExportInterviewType | Status of exported interviews (optional)
 questionnaire_identity = 'questionnaire_identity_example' # str | Questionnaire id (optional)
-export_status = swagger_client.ExportStatus() # ExportStatus | Status of export process (optional)
+export_status = client.ExportStatus() # ExportStatus | Status of export process (optional)
 has_file = true # bool | Has export process file to download (optional)
 limit = 56 # int | Select a limited number of records (optional)
 offset = 56 # int | Skip number of records before beginning to return records (optional)
@@ -81,16 +81,16 @@ Cancel export process
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.ExportApi(swagger_client.ApiClient(configuration))
+api_instance = client.ExportApi(client.ApiClient(configuration))
 id = 789 # int | 
 
 try:
@@ -131,16 +131,16 @@ Downloads export file. It will return either 200 status code with export file co
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.ExportApi(swagger_client.ApiClient(configuration))
+api_instance = client.ExportApi(client.ApiClient(configuration))
 id = 789 # int | Export process id
 
 try:
@@ -180,16 +180,16 @@ Get detailed information about export process
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.ExportApi(swagger_client.ApiClient(configuration))
+api_instance = client.ExportApi(client.ApiClient(configuration))
 id = 789 # int | Export process id
 
 try:
@@ -230,17 +230,17 @@ Start export file creation
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import client
+from ..rest import ApiException
 from pprint import pprint
 # Configure HTTP basic authorization: basic
-configuration = swagger_client.Configuration()
+configuration = client.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swagger_client.ExportApi(swagger_client.ApiClient(configuration))
-body = swagger_client.CreateExportProcess() # CreateExportProcess | 
+api_instance = client.ExportApi(client.ApiClient(configuration))
+body = client.CreateExportProcess() # CreateExportProcess | 
 
 try:
     # Start export file creation

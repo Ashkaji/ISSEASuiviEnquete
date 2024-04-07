@@ -2,58 +2,23 @@
 {% load static %}
 
 {% block additional-style %}
-    <link rel="stylesheet" href="{% static 'css/dash-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard/dash-style.css' %}">
 {% endblock additional-style %}
 
+{% block additional-dash-style %}
+{% endblock %}
+
 {% block header %}
-    {{ header_message | safe }}
+    <p>Rien à afficher</p>
 {% endblock %}
 
 {% block content %}
-    {% for metric_section in metric_sections %}
-        {% with section_counter=forloop.counter %}
-            <div class = "metrics-section rank-{{ section_counter }}">
-            {% for metric_bloc in metric_section %}
-                {% with bloc_counter=forloop.counter %}
-                    <div class = "metric-block color-changing-element rank-{{ section_counter }}-{{ bloc_counter }}">
-                        <div class = "metric-header">
-                            <h5 class = "metric-title">{{ metric_bloc.title }}</h5>
-                            <i class = "metric-icon">{{ metric_bloc.icon }}</i>
-                        </div>
-                        <div class = "metric-main">
-                            <h2 class = "metric-value">{{ metric_bloc.value }}</h2>
-                            <h5 class = "metric-unit">{{ metric_bloc.unit }}</h5>
-                        </div>
-                    </div>
-                {% endwith %}
-            {% endfor %}
-            </div>
-        {% endwith %}
-    {% endfor %}
 
-    {% for plot_section in plot_sections %}
-        {% with section_counter=forloop.counter %}
-            <div class = "plots-section rank-{{ forloop.counter }}">
-            {% for plot_bloc in plot_section %}
-                {% with bloc_counter=forloop.counter %}
-                    <div class = "plot-block color-changing-element rank-{{ section_counter }}-{{ bloc_counter }}">
-                        <h5 class = "plot-title">{{ plot_bloc.title }}</h5>
-                        <div class = "plot">{{ plot_bloc.plot }}</div>
-                    </div>
-                {% endwith %}
-            {% endfor %}
-            </div>
-        {% endwith %}
-    {% endfor %}
-
-    {% for geographic_section in geographic_sections %}
-        <div class = "geographic-section color-changing-element">
-            <h5 class = "geographic plot-title"></h5>
-            <div class = "geographic-plot"></div>
-        </div>
-    {% endfor %}
 {% endblock %}
 
 {% block additional-scripts %}
     <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
+
+{% block additional-dash-script %}
 {% endblock %}
