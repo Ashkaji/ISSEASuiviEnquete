@@ -56,7 +56,8 @@ div.geographic-section {
 	margin: 10px 1%;
 	border-radius: 15px;
 	background: white;
-	height: 400px;
+	height: auto;
+	min-height: 400px;
 	transition: 0.2s ease;
 }
 
@@ -65,3 +66,4 @@ div.geographic-section {
         flex: 1 0 90%; /* Each item takes up 100% width on smaller screens (1 item per row) */
     }
 }
+

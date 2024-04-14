@@ -24,12 +24,10 @@ SECRET_KEY = 'django-insecure-c$me!b&)-uk3_w1u)pn*maa3_ml+6-48ch7(wxk02044hvthq8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Configure HTTP basic authorization: basic
-API_URL = 'https://your-ssaw-api-url'
-API_USERNAME = 'your_api_user'
-API_PASSWORD = 'your_api_password'
-API_WORKSPACE = 'your_workspace'
-
+# Configurations of the client API
+API_USERNAME = 'admin'
+API_PASSWORD = 'l_W67j7wb0'
+API_URL = 'https://ashkaji-demo.mysurvey.solutions/'
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
+    'swagger_client',
 ]
 
 MIDDLEWARE = [

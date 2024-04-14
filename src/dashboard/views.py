@@ -1,40 +1,42 @@
+from __future__ import print_function
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
-import plotly.express as px
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
 
-df = px.data.tips()
-fig = px.histogram(df, x="sex", y="total_bill",
-                   color='smoker', barmode='group',)
-fig.update_layout(margin={'t': 20, 'r': 10, 'b': 20, 'l': 10})
+from ISSEASuiviEnquete.settings import API_USERNAME, API_URL, API_PASSWORD
 
 INTERVIEWER_SECTIONS = [
     {
         'section_type': 'metrics',
         'section_data': [
             {
-                'title': 'Charge totale de travail',
+                'title': 'Charge de travail',
                 'icon': '',
                 'value': '20',
                 'unit': 'Ménages'
             },
             {
-                'title': 'Nombre total de ménages déjà enquêtés',
+                'title': 'Enquêtés',
                 'icon': '',
                 'value': '10',
                 'unit': 'Ménages'
             },
             {
-                'title': 'Pourcentage total de ménages enquêtés',
+                'title': 'Pourcentage enquêtés',
                 'icon': '',
                 'value': '50',
-                'unit': '%'
+                'unit': '% des ménages affectés'
             },
             {
-                'title': 'Pourcentage total net de ménages enquêtés',
+                'title': 'Pourcentage net enquêtés',
                 'icon': '',
                 'value': '75',
-                'unit': '%'
+                'unit': '% des ménages valides'
             },
         ]
     },
@@ -42,12 +44,12 @@ INTERVIEWER_SECTIONS = [
         'section_type': 'plots',
         'section_data': [
             {
-                'title': 'Statut des ménages enquêtés ',
+                'title': 'Evolution du nombre de ménages enquêtés par jour',
                 'plot': '',
             },
             {
-                'title': 'Evolution du nombre de ménages enquêtés par jour',
-                'plot': fig.to_html(full_html=False),
+                'title': 'Statut des ménages enquêtés ',
+                'plot': '',
             },
         ],
     },
@@ -69,7 +71,7 @@ INTERVIEWER_SECTIONS = [
         'section_data': [
             {
                 'title': 'Carte de la zone à couvrir',
-                'plot': fig.to_html(full_html=False),
+                'plot': '',
             }
         ]
     }
@@ -79,30 +81,89 @@ CONTROLLER_SECTIONS = [
         'section_type': 'metrics',
         'section_data': [
             {
-                'title': 'Charge totale de travail par les enquêteurs',
+                'title': 'Charge des enquêteurs',
                 'icon': '',
-                'value': '',
-                'unit': ''
+                'value': '25',
+                'unit': 'Ménages'
             },
             {
-                'title': 'Nombre total de ménages déjà enquêtés par les enquêteurs',
+                'title': 'Total enquêtés',
                 'icon': '',
                 'value': '',
-                'unit': ''
+                'unit': 'Ménages'
             },
             {
-                'title': 'Pourcentage total de ménages enquêtés par les enquêteurs',
+                'title': 'Pourcentage enquêtés',
                 'icon': '',
-                'value': '',
-                'unit': ''
+                'value': '5',
+                'unit': '% des ménages affectés'
             },
             {
-                'title': 'Pourcentage total net de ménages enquêtés par les enquêteurs',
+                'title': 'Pourcentage total net enquêtés',
                 'icon': '',
-                'value': '',
-                'unit': ''
+                'value': '15',
+                'unit': '% des ménages valides'
             },
         ]
+    },
+    {
+        'section_type': 'metrics',
+        'section_data': [
+            {
+                'title': 'Durée moyenne d’administration du questionnaire ',
+                'icon': '',
+                'value': '',
+                'unit': 'minutes'
+            },
+            {
+                'title': 'Durée totale d’administration du questionnaire ',
+                'icon': '',
+                'value': '',
+                'unit': 'minutes'
+            },
+            {
+                'title': 'Ménages non localicés',
+                'icon': '',
+                'value': '',
+                'unit': 'Ménages'
+            },
+            {
+                'title': 'Interviewer à risque',
+                'icon': '',
+                'value': '',
+                'unit': '% de chances'
+            },
+        ]
+    },
+    {
+        'section_type': 'plots',
+        'section_data': [
+            {
+                'title': 'Evolution du nombre de ménages enquêtés par jour',
+                'plot': '',
+            },
+            {
+                'title': 'Evolution du nombre de ménages enquêtés par jour, par enquêteur',
+                'plot': '',
+            },
+            {
+                'title': 'Evolution du nombre de ménages enquêtés par jour et par ZD',
+                'plot': '',
+            },
+            {
+                'title': 'Répartition des ménages enquêtés par statut et par ZD, par enquêteur',
+                'plot': '',
+            },
+        ],
+    },
+    {
+        'section_type': 'plots',
+        'section_data': [
+            {
+                'title': '',
+                'plot': '',
+            },
+        ],
     },
 ]
 SUBSUPERVISOR_SECTIONS = [
@@ -111,6 +172,21 @@ SUBSUPERVISOR_SECTIONS = [
 SUPERVISOR_SECTIONS = [
 
 ]
+
+configuration = swagger_client.Configuration()
+configuration.username = API_USERNAME
+configuration.password = API_PASSWORD
+configuration.host = API_URL
+
+# create an instance of the API class
+api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+
+try:
+    # List all assignments with filtering
+    api_response = api_instance.api_v1_assignments_get(supervisor_id='C001')
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling AssignmentsApi->api_v1_assignments_get: %s\n" % e)
 
 
 # Create your views here.
