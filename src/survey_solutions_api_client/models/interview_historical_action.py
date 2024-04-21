@@ -1,0 +1,40 @@
+from enum import Enum
+
+
+class InterviewHistoricalAction(str, Enum):
+    ANSWERREMOVED = "AnswerRemoved"
+    ANSWERSET = "AnswerSet"
+    APPROVEBYHEADQUARTER = "ApproveByHeadquarter"
+    APPROVEBYSUPERVISOR = "ApproveBySupervisor"
+    CLOSEDBYSUPERVISOR = "ClosedBySupervisor"
+    COMMENTSET = "CommentSet"
+    COMPLETED = "Completed"
+    DELETED = "Deleted"
+    GROUPDISABLED = "GroupDisabled"
+    GROUPENABLED = "GroupEnabled"
+    INTERVIEWCREATED = "InterviewCreated"
+    INTERVIEWERASSIGNED = "InterviewerAssigned"
+    INTERVIEWMODECHANGED = "InterviewModeChanged"
+    KEYASSIGNED = "KeyAssigned"
+    OPENEDBYSUPERVISOR = "OpenedBySupervisor"
+    PAUSED = "Paused"
+    QUESTIONDECLAREDINVALID = "QuestionDeclaredInvalid"
+    QUESTIONDECLAREDVALID = "QuestionDeclaredValid"
+    QUESTIONDISABLED = "QuestionDisabled"
+    QUESTIONENABLED = "QuestionEnabled"
+    RECEIVEDBYINTERVIEWER = "ReceivedByInterviewer"
+    RECEIVEDBYSUPERVISOR = "ReceivedBySupervisor"
+    REJECTEDBYHEADQUARTER = "RejectedByHeadquarter"
+    REJECTEDBYSUPERVISOR = "RejectedBySupervisor"
+    RESTARTED = "Restarted"
+    RESTORED = "Restored"
+    RESUMED = "Resumed"
+    SUPERVISORASSIGNED = "SupervisorAssigned"
+    TRANSLATIONSWITCHED = "TranslationSwitched"
+    UNAPPROVEBYHEADQUARTERS = "UnapproveByHeadquarters"
+    VARIABLEDISABLED = "VariableDisabled"
+    VARIABLEENABLED = "VariableEnabled"
+    VARIABLESET = "VariableSet"
+
+    def __str__(self) -> str:
+        return str(self.value)

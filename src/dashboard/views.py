@@ -1,192 +1,95 @@
-from __future__ import print_function
+import pickle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
-import time
-import swagger_client
-from swagger_client.rest import ApiException
-from pprint import pprint
+from ISSEASuiviEnquete.settings import API_USERNAME, API_PASSWORD, API_URL
 
-from ISSEASuiviEnquete.settings import API_USERNAME, API_URL, API_PASSWORD
 
-INTERVIEWER_SECTIONS = [
-    {
-        'section_type': 'metrics',
-        'section_data': [
-            {
-                'title': 'Charge de travail',
-                'icon': '',
-                'value': '20',
-                'unit': 'Ménages'
-            },
-            {
-                'title': 'Enquêtés',
-                'icon': '',
-                'value': '10',
-                'unit': 'Ménages'
-            },
-            {
-                'title': 'Pourcentage enquêtés',
-                'icon': '',
-                'value': '50',
-                'unit': '% des ménages affectés'
-            },
-            {
-                'title': 'Pourcentage net enquêtés',
-                'icon': '',
-                'value': '75',
-                'unit': '% des ménages valides'
-            },
-        ]
-    },
-    {
-        'section_type': 'plots',
-        'section_data': [
-            {
-                'title': 'Evolution du nombre de ménages enquêtés par jour',
-                'plot': '',
-            },
-            {
-                'title': 'Statut des ménages enquêtés ',
-                'plot': '',
-            },
-        ],
-    },
-    {
-        'section_type': 'plots',
-        'section_data': [
-            {
-                'title': 'Evolution du nombre de ménages enquêtés par jour et par ZD',
-                'plot': '',
-            },
-            {
-                'title': 'Répartition des ménages enquêtés par statut et par ZD',
-                'plot': '',
-            },
-        ],
-    },
-    {
-        'section_type': 'geographic',
-        'section_data': [
-            {
-                'title': 'Carte de la zone à couvrir',
-                'plot': '',
-            }
-        ]
-    }
-]
-CONTROLLER_SECTIONS = [
-    {
-        'section_type': 'metrics',
-        'section_data': [
-            {
-                'title': 'Charge des enquêteurs',
-                'icon': '',
-                'value': '25',
-                'unit': 'Ménages'
-            },
-            {
-                'title': 'Total enquêtés',
-                'icon': '',
-                'value': '',
-                'unit': 'Ménages'
-            },
-            {
-                'title': 'Pourcentage enquêtés',
-                'icon': '',
-                'value': '5',
-                'unit': '% des ménages affectés'
-            },
-            {
-                'title': 'Pourcentage total net enquêtés',
-                'icon': '',
-                'value': '15',
-                'unit': '% des ménages valides'
-            },
-        ]
-    },
-    {
-        'section_type': 'metrics',
-        'section_data': [
-            {
-                'title': 'Durée moyenne d’administration du questionnaire ',
-                'icon': '',
-                'value': '',
-                'unit': 'minutes'
-            },
-            {
-                'title': 'Durée totale d’administration du questionnaire ',
-                'icon': '',
-                'value': '',
-                'unit': 'minutes'
-            },
-            {
-                'title': 'Ménages non localicés',
-                'icon': '',
-                'value': '',
-                'unit': 'Ménages'
-            },
-            {
-                'title': 'Interviewer à risque',
-                'icon': '',
-                'value': '',
-                'unit': '% de chances'
-            },
-        ]
-    },
-    {
-        'section_type': 'plots',
-        'section_data': [
-            {
-                'title': 'Evolution du nombre de ménages enquêtés par jour',
-                'plot': '',
-            },
-            {
-                'title': 'Evolution du nombre de ménages enquêtés par jour, par enquêteur',
-                'plot': '',
-            },
-            {
-                'title': 'Evolution du nombre de ménages enquêtés par jour et par ZD',
-                'plot': '',
-            },
-            {
-                'title': 'Répartition des ménages enquêtés par statut et par ZD, par enquêteur',
-                'plot': '',
-            },
-        ],
-    },
-    {
-        'section_type': 'plots',
-        'section_data': [
-            {
-                'title': '',
-                'plot': '',
-            },
-        ],
-    },
-]
-SUBSUPERVISOR_SECTIONS = [
+class MetricsAndPlots:
+    def __init__(self, user_login):
+        self.user_login = user_login
 
-]
-SUPERVISOR_SECTIONS = [
 
-]
+class InterviewerMetricsAndPlots:
+    def __init__(self, user_login, *args, **kwargs):
+        self.user_login = user_login
 
-configuration = swagger_client.Configuration()
-configuration.username = API_USERNAME
-configuration.password = API_PASSWORD
-configuration.host = API_URL
+    def get_01_workload(self):
+        pass
 
-# create an instance of the API class
-api_instance = swagger_client.AssignmentsApi(swagger_client.ApiClient(configuration))
+    def get_02_completed_interviews_number(self):
+        pass
 
-try:
-    # List all assignments with filtering
-    api_response = api_instance.api_v1_assignments_get(supervisor_id='C001')
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling AssignmentsApi->api_v1_assignments_get: %s\n" % e)
+    def get_03_completed_interviews_percentage(self):
+        pass
+
+    def get_04_completed_interviews_net_percentage(self):
+        pass
+
+    def plot_01_completed_interviews_number_per_day(self):
+        pass
+
+    def plot_02_completed_interviews_cumulative_number(self):
+        pass
+
+    def plot_03_visited_households_status(self):
+        pass
+
+    def plot_04_visited_households_status_per_ea(self):
+        pass
+
+    def plot_05_completed_interviews_number_per_day_and_ea(self):
+        pass
+
+    def plot_06_completed_interviews_cumulative_number_per_ea(self):
+        pass
+
+    def plot_spatial_progression(self):
+        pass
+
+
+class ControllerMetricsAndPlots(InterviewerMetricsAndPlots):
+    def plot_07_completed_interviews_number_per_day_and_interviewer(self):
+        pass
+
+    def plot_08_completed_interviews_cumulative_number_per_interviewer(self):
+        pass
+
+    def plot_09_visited_households_status_per_interviewer(self):
+        pass
+
+    def get_05_interviews_duration_mean(self):
+        pass
+
+    def get_06_interviews_duration_total(self):
+        pass
+
+    def get_07_surveyed_households_without_gps_number(self):
+        pass
+
+    def get_08_risk_interviewer_probability(self):
+        pass
+
+    def plot_10_activity_diagram(self):
+        pass
+
+    def plot_11_interviews_duration(self):
+        pass
+
+
+class SupervisorMetricsAndPlots(InterviewerMetricsAndPlots):
+    def plot_07_visited_households_status_cumulative(self):
+        pass
+
+    def plot_08_visited_households_status_per_controller(self):
+        pass
+
+    def plot_09_completed_interviews_number_per_day_and_controller(self):
+        pass
+
+    def plot_10_completed_interviews_cumulative_number_per_controller(self):
+        pass
 
 
 # Create your views here.
@@ -195,7 +98,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.sections_data = None
 
     @property
     def current_user(self):
@@ -207,18 +109,16 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         if user_groups:
             return user_groups[0].name
         else:
-            return None
+            return 'base'
 
     @property
     def header_message(self, *args, **kwargs):
         principal_message = """<h1>Bienvenu sur votre tableau de bord!</h1>
-        <p>Vous trouverez toutes les informations dont 
+        <p>Vous trouverez toutes les informations dont
         vous avez besoin pour une meilleure collecte"""
         personalised_msg = {
             'Supervisors': ' dans votre zone</p>',
             'Interviewers': '</p>',
-            'Controllers': ' de vos enquêteurs</p>',
-            'SubSupervisors': ' pour vos controleurs</p>',
         }
         _header_msg = 'Nothing to show'
         if self.current_user_group in personalised_msg.keys():
@@ -230,27 +130,54 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         return super(DashboardView, self).dispatch(request, *args, **kwargs)
 
     def get_template_names(self):
-        personalised_template = {
-            'Supervisors': 'dashboard/supervisor-dash.html',
-            'Interviewers': 'dashboard/interviewer-dash.html',
-            'Controllers': 'dashboard/controller-dash.html',
-            'SubSupervisors': 'dashboard/supervisor-dash.html',
-        }
+        return f'dashboard/{self.current_user_group}-dash.html'
 
-        return personalised_template.get(self.current_user_group, 'dashboard/base-dash.html')
+    def get_sections_layout(self, *args, **kwargs):
+        section_data_file = f'dashboard/rendering/{self.current_user_group}.pickle'
+        try:
+            with open(section_data_file, 'rb') as f:
+                return pickle.load(f)
+        except FileNotFoundError:
+            return []
+
+    #
+    # def get_metrics_and_plots_generator(self):
+    #     match self.current_user_group:
+    #         case 'Interviewers':
+    #             return InterviewerMetricsAndPlots(user_login=self.request.user.username)
+    #         case 'Controllers':
+    #             return ControllerMetricsAndPlots(user_login=self.request.user.username)
+    #         case _:
+    #             return SupervisorMetricsAndPlots(user_login=self.request.user.username)
+
+    @staticmethod
+    def get_metrics_and_plots_method_names(cls_instance):
+        all_methods = dir(cls_instance)
+        metrics = [c for c in all_methods if c.split('_')[0] == 'get']
+        plots = [c for c in all_methods if c.split('_')[0] == 'plot']
+        return dict(metrics=metrics, plots=plots)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.template_name = self.get_template_names()
 
-        personalised_sections_data = {
-            'Supervisors': SUPERVISOR_SECTIONS,
-            'Interviewers': INTERVIEWER_SECTIONS,
-            'Controllers': CONTROLLER_SECTIONS,
-            'SubSupervisors': SUBSUPERVISOR_SECTIONS,
-        }
-
         context['header_message'] = self.header_message
-        context['sections'] = personalised_sections_data.get(self.current_user_group, {})
+        section_to_render = self.get_sections_layout()
+
+        # metrics_and_plots = self.get_metrics_and_plots_generator()
+
+        # methods = self.get_metrics_and_plots_method_names(metrics_and_plots)['metrics']
+        # for idx, section in enumerate(section_to_render):
+        #     if section['section_type'] == 'metrics':
+        #         for bloc in section['section_data']:
+        #             method = getattr(metrics_and_plots, methods[idx])
+        #             bloc['value'] = method()
+
+        # for section in section_to_render:
+        #     if section['section_type'] == 'plots':
+        #         for bloc in section['section_data']:
+        #             bloc['plot'] = fig.to_html(full_html=False, include_plotlyjs='cdn', include_mathjax=False, )
+
+        context['sections'] = section_to_render
 
         return context

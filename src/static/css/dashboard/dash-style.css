@@ -7,6 +7,11 @@ header h1 {
 	margin: 20px 0;
 }
 
+.dash-part {
+	font-weight: 400;
+	margin: 20px 1%;
+}
+
 h2 {
 	font-size: 2em;
 	font-weight: 400;
@@ -59,6 +64,10 @@ div.geographic-section {
 	height: auto;
 	min-height: 400px;
 	transition: 0.2s ease;
+}
+
+.plotly-graph-div, .plot-container {
+	width: 100%;
 }
 
 @media (max-width: 640px) {

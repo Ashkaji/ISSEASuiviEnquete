@@ -1,27 +1,23 @@
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 
 
 # Create your models here.
 class MyUserManager(BaseUserManager):
-    def create_user(self, username, first_name, last_name, password=None, **extra_fields):
-        if not username:
+    def create_user(self, login, password=None, **extra_fields):
+        if not login:
             raise ValueError("You must define a username")
         user = self.model(
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
+            login=login,
             **extra_fields)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, username, first_name='', last_name='', password=None, **extra_fields):
+    def create_superuser(self, login, password=None, **extra_fields):
         user = self.create_user(
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
+            login=login,
             password=password,
             **extra_fields
         )
@@ -32,12 +28,13 @@ class MyUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=10, unique=True, default='')
-    first_name = models.CharField(max_length=50, blank=False, null=False, default='')
-    last_name = models.CharField(max_length=45, blank=False, null=False, default='')
-    superieur = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, default='')
+    login = models.CharField(max_length=10, unique=True, default='')
+    # supervisor = models.CharField(max_length=10, null=True, blank=True, default='')
+    fullname = models.CharField(max_length=50, blank=False, null=False, default='')
+    phonenumber = models.CharField(max_length=10, default='')
+    head_of_team = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, default='')
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = []
 
     objects = MyUserManager()
@@ -55,15 +52,13 @@ class CustomUser(AbstractUser):
         return f"{self.last_name.lower()}-{self.first_name.lower()}"
 
 
-class Supervisor(CustomUser):
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        group_controllers = Group.objects.get(name='Supervisors')
-        self.groups.add(group_controllers)
-
-
 class Student(CustomUser):
-    number = models.CharField(max_length=6, unique=True, null=False, blank=False, default='')
+    register = models.CharField(max_length=6, unique=True, default='', blank=True, null=True)
+    gender = models.CharField(
+        choices=[('F', 'Female'), ('M', 'Male')],
+        max_length=1,
+        default=''
+    )
     grade = models.CharField(
         choices=[
             ('AS1', 'AS 1st Year'),
@@ -72,19 +67,15 @@ class Student(CustomUser):
             ('ISEL2', 'ISE Long 2nd Year'),
             ('ISEL3', 'ISE Long 3rd Year'),
             ('ISE1-ECO', 'ISE1 Economics'),
-            ('ISE1-MATHS', 'ISE1-MATHS'),
+            ('ISE1-MATHS', 'ISE1 Mathematics'),
             ('ISE2', 'ISE 2nd Year'),
         ],
-        max_length=15,
+        max_length=11,
         null=False,
         blank=False,
-        default=''
+        default='',
     )
-    gender = models.CharField(
-        choices=[('F', 'Female'), ('M', 'Male')],
-        max_length=1,
-        default=''
-    )
+
     nationality = models.CharField(max_length=10, default='')
 
     class Meta:
@@ -98,15 +89,12 @@ class Interviewer(Student):
         self.groups.add(group_interviewers)
 
 
-class Controller(Student):
+class Supervisor(Student):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        group_controllers = Group.objects.get(name='Controllers')
-        self.groups.add(group_controllers)
+        group_supervisors = Group.objects.get(name='Supervisors')
+        self.groups.add(group_supervisors)
 
 
-class SubSupervisor(Student):
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        group_controllers = Group.objects.get(name='SubSupervisors')
-        self.groups.add(group_controllers)
+class Headquarters:
+    pass
