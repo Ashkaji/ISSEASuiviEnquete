@@ -42,7 +42,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         generator_class = {
             'Interviewers': MetricsAndPlots,
             'Supervisors': SupervisorMetricsAndPlots,
-            '_': HeadquatersMetricsAndPlots,
+            'Headquarters': HeadquatersMetricsAndPlots,
         }[self.current_user_group]
         return generator_class(user_login=self.current_user.login)
 
@@ -55,14 +55,20 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             'plots': [method_name for method_name in dir(generator) if method_name.startswith('plot_')],
         }
 
+        position = 0
         for section in sections_skeleton:
-            section_type = section['section_type']
-            if section_type in section_methods:
-                method_names = section_methods[section_type]
-                position = 0
+            if section['section_type'] == 'metrics':
                 for bloc in section['section_data']:
-                    method = getattr(generator, method_names[position])
-                    bloc[section_type] = method()
+                    method = getattr(generator, section_methods['metrics'][position])
+                    bloc['value'] = method()
+                    position += 1
+
+        position = 0
+        for section in sections_skeleton:
+            if section['section_type'] == 'plots':
+                for bloc in section['section_data']:
+                    method = getattr(generator, section_methods['plots'][position])
+                    bloc['plots'] = method()
                     position += 1
 
         return sections_skeleton
