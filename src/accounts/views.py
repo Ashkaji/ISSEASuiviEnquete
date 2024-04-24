@@ -27,7 +27,7 @@ class CustomLoginView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=str(password))
+        user = authenticate(login=username, password=str(password))
 
         if user:
             login(request, user)

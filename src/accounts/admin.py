@@ -1,26 +1,28 @@
 from django.contrib import admin
 
-from accounts.models import CustomUser, Supervisor, Interviewer
+from accounts.models import CustomUser, StudentUser
 
 
 # Register your models here.
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = (
-        'fullname',
-        'email',
+        'login',
+        'role',
+        'supervisor',
     )
     empty_value_display = 'unknown'
 
 
-@admin.register(Interviewer)
-class InterviewerAdmin(admin.ModelAdmin):
+@admin.register(StudentUser)
+class StudentAdmin(admin.ModelAdmin):
     list_display = (
+        'idnumber',
         'fullname',
-        'grade',
         'gender',
+        'grade',
         'nationality',
-        'phonenumber',
+        'role',
+        'login',
     )
-    list_per_page = 50
     empty_value_display = 'unknown'

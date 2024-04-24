@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
-    'swagger_client',
+    'survey_solutions_api_client',
 ]
 
 MIDDLEWARE = [

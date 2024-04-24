@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Creates Django groups for user types (Interviewers, Controllers, etc.)'
 
     def handle(self, *args, **options):
-        group_names = ['Interviewers', 'Controllers', 'SubSupervisors', 'Supervisors']
+        group_names = ['Interviewers', 'Supervisors', 'Headquarters', 'Observers']
         for name in group_names:
             group, created = Group.objects.get_or_create(name=name)
             if created:
