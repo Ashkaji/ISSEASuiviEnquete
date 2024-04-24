@@ -14,7 +14,7 @@ git clone https://github.com/Ashkaji/ISSEASuiviEnquete.git
 2. Create python virtual environment and run this commmand:
 
 ```
-pip install -r requireements.txt
+pip install -r requirements.txt
 ````
 
 
