@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+	<style>
+:root{
+	--dark-mode-bg-color: #010119;
+    --dark-mode-div-bg: #030326;
+    --blue-color: #1919DD;
+    --slight-grey-color: #EFF0ED;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+    text-decoration: none;
+	font-weight: 300;
+    font-family: "Jost*", "Product-Sans", "Poppins", "Glacial indifference", "Century Gothic";
+}
+
+body {
+    margin: 0;
+	box-sizing: border-box;
+    padding: 0;
+	background: var(--slight-grey-color);
+    font-family: Arial, sans-serif;
+}
+
+div.metrics-section, div.plots-section{
+    display: flex;
+    flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+header {
+	margin: 20px 1%;
+}
+
+header h1 {
+	font-weight: 400;
+	margin: 20px 0;
+}
+
+
+nav {
+    background-color: white;
+    z-index: 1000;
+    padding: 10px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+nav img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+nav ul {
+    display: flex;
+	list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav a {
+    padding: 10px 20px;
+    text-transform: capitalize;
+	text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    font-size: 0.94em;
+}
+
+nav .burger {
+	display: none;
+    cursor: pointer;
+}
+
+nav ul:hover a{
+    opacity: 0.5;
+}
+
+nav ul:hover a:hover {
+    opacity: 1;
+}
+
+.switch {
+    position: relative;
+    width: 60px;
+	left:0;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--slight-grey-color);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #444;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+
+
+div.plot-block {
+    flex: 1 0 45%; /* Each item takes up 50% of the width (2 items per row) */
+    padding: 20px;
+	margin: 10px 1%;
+	height: 300px;
+	border-radius: 15px;
+	box-sizing: border-box;
+	background: white;
+}
+
+div.metric-block {
+    flex: 1 0 22%; /* Each item takes up 50% of the width (2 items per row) */
+    padding: 20px;
+    box-sizing: border-box;
+	margin: 10px 1%;
+	border-radius: 20px;
+	background: white;
+	transition: all 0.4s ease;
+	position: relative;
+}
+
+div.metric-tooltip {
+	position: absolute; 
+	border-radius: 15px;
+	top: 0%;
+	left: 0;
+	width: 100%;
+	padding: 20px 10px;
+	box-sizing: border-box;
+	background: blue;
+	color: white;
+	opacity: 0;
+	transition: 0.4s;
+}
+div.metric-block:hover div.metric-tooltip {
+	top: -70%;
+	opacity: 1;
+}
+
+div.metric-block:hover {
+	background-color: var(--blue-color);
+	color: var(--slight-grey-color);
+}
+div.metric-block:hover, div.plot-block:hover {
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	font-size: 2em;
+	font-weight: 400;
+}
+
+div.geographic-section {
+    padding: 20px;
+    box-sizing: border-box;
+	margin: 10px 1%;
+	border-radius: 15px;
+	background: white;
+	height: 400px;
+	transition: 0.2s ease;
+}
+
+footer {
+    background: white;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.footer-links a {
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #FFD700;
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #FFD700;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links, .social-icons {
+        margin-top: 10px;
+    }
+	
+	nav .nav-links {
+        display: none;
+    }
+
+    nav .burger {
+        display: block;
+    }
+
+    nav .burger:hover {
+        background-color: #555;
+    }
+
+    nav .burger-menu {
+        display: none;
+    }
+
+    nav .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: #333;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        padding: 10px 0;
+        z-index: 1;
+    }
+}
+
+
+@media (max-width: 640px) {
+    div.plot-block, div.metric-block {
+        flex: 1 0 90%; /* Each item takes up 100% width on smaller screens (1 item per row) */
+    }
+		footer {
+			border-radius: 80px 80px 0 0;
+		}
+		
+		nav{
+			border-radius: 0 0 80px 80px;
+		}
+		
+}
+	</style>
+</head>
+<body>
+
+	<nav>
+		<label class="switch">
+			<input type="checkbox" id="toggle">
+			<span class="slider round"></span>		
+		</label>
+        <ul class = "nav-links">
+            <li><a href ="#">Home</a></li>
+            <li><a href ="#">About</a></li>
+            <li><a href ="#">Support</a></li>
+            <li><a href ="#">Forum</a></li>
+        </ul>
+		
+		<div class="burger">&#9776;</div>
+
+        <div class = "nav-identification">
+            <h4>{{ user.first_name | capfirst }}</h4>
+            <img src = "{% static 'media/image.css' %}">
+        </div>
+	</nav>
+	
+	<header>
+        <h1>Bienvenu dans votre tableau de bord!</h1>
+        <p>Vous trouverez toutes les informations dont vous avez besoin pour une meilleure collecte</p>
+    </header>
+	
+	   <main>
+        <div class = "metrics-section">
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+				<div class = "metric-tooltip">
+					<p> Lorem epsilum dolor si lruz arjf nd cfnd 
+					dkdjf dkjf djffgj. 
+					</p>
+				</div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+				<div class = "metric-tooltip">
+					<p> Lorem epsilum dolor si lruz arjf nd cfnd 
+					dkdjf dkjf djffgj. 
+					</p>
+				</div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+				<div class = "metric-tooltip">
+					<p> Lorem epsilum dolor si lruz arjf nd cfnd 
+					dkdjf dkjf djffgj. 
+					</p>
+				</div>
+            </div>
+
+            <div class = "metric-block color-changing-element">
+                <div class = "metric-header">
+                    <h5 class = "metric-title">Charge de travail</h5>
+                    <i class = "metric-icon"></i>
+                </div>
+                <div class = "metric-main">
+                    <h2 class = "metric-value">10</h2>
+                    <h5 class = "metric-unit">Ménage(s)</h5>
+                </div>
+				<div class = "metric-tooltip">
+					<p> Lorem epsilum dolor si lruz arjf nd cfnd 
+					dkdjf dkjf djffgj. 
+					</p>
+				</div>
+            </div>
+        </div>
+
+
+        <div class = "plots-section">
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+            <div class = "plot-block color-changing-element">
+                <h5 class = "plot-title">Evolution du nombre de ménages enquêtés par jour</h5>
+                <div class = "plot">
+
+                </div>
+            </div>
+        </div>
+
+        <div class = "geographic-section color-changing-element">
+            <h5 class = "plot-title">Position géographique des ménages à enquêter</h5>
+            <div class = "geographic-plot">
+
+            </div>
+        </div>
+
+
+    </main>
+	
+	<footer>
+        <div class="footer-container">
+            <div class="footer-logo">Company Logo</div>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+	<script>
+		const toggle = document.getElementById('toggle');
+		
+		const elementsToColor = document.querySelectorAll('.color-changing-element');
+		const dark_mode_bg_color = "#010119";
+		const dark_mode_div_bg = "#030326";
+		const blue_color = "#1919DD";
+		const slight_grey_color = "#EFF0ED";
+		const white_color = "#fff";
+		toggle.addEventListener('change', () => {
+			if (toggle.checked) {
+				
+				document.body.style.backgroundColor = dark_mode_bg_color;
+				document.body.style.color = slight_grey_color;
+				
+				elementsToColor.forEach(element => {
+					element.style.color = slight_grey_color;
+					element.style.backgroundColor = dark_mode_div_bg; // Change background color for example
+				});
+			} else {
+				document.body.style.backgroundColor = slight_grey_color;
+				document.body.style.color = dark_mode_bg_color;
+				
+				elementsToColor.forEach(element => {
+					element.style.color = dark_mode_bg_color;
+					element.style.backgroundColor = white_color; // Change background color for example
+				});
+			}
+		});
+		
+		function toggleMenu() {
+            var navLinks = document.getElementById("navLinks");
+            navLinks.classList.toggle("active");
+        }
+	</script>
+</body>
+</html>
