@@ -1,4 +1,5 @@
 {% extends 'dashboard/base-dash.html' %}
+{% load custom_filters %}
 {% load static %}
 
 {% block additional-dash-style %}
@@ -6,13 +7,31 @@
 {% endblock %}
 
 {% block header %}
-<h1>Bienvenu sur votre tableau de bord!</h1>
-<p>Vous trouverez toutes les informations dont vous avez besoin pour une meilleure collecte dans votre zone.</p>
+    <h1>Bienvenu {{ user.fullname|lastfirstname }} ({{ user.login }}) sur votre tableau de bord!</h1>
+    <p>Sur ce tableau de bord, vous trouverez les informations dont vous avez besoin pour une meilleure
+        collecte dans votre zone.</p>
+    <p><strong>NB</strong>: N’oubliez pas de faire parvenir tout problème recontré dans à l'administration.</p>
 {% endblock %}
 
 {% block content %}
     {% for section in sections %}
         {% with section_counter=forloop.counter %}
+            {% if section_counter == 1 %}
+            <h1 class="dash-part">Situation générale de la collecte</h1>
+            <div class="dash-part-description">
+                <p>Cette section présente les informations sur la collecte de manière générale.</p>
+            </div>
+            {% elif section_counter == 3 %}
+            <h1 class="dash-part">Statut des ménages visités dans la zone</h1>
+            <div class="dash-part-description">
+                <p>Voyez comment évoluent la collecte dans votre zone à travers leur situation journalière.</p>
+            </div>
+            {% elif section_counter == 4 %}
+            <h1 class="dash-part">Situation par contrôleurs</h1>
+            <div class="dash-part-description">
+                <p>Vous verrez comment optimiser la collecte suivant que la ZD est problématique ou non.</p>
+            </div>
+            {% endif %}
             <div class = "{{ section.section_type }}-section rank-{{ section_counter }}">
             {% for bloc in section.section_data %}
                 {% with bloc_counter=forloop.counter %}

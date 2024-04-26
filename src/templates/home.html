@@ -5,12 +5,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <h1>Welcome {{ user.fullname | capfirst }}, u're back!</h1>
-    {% else %}
-        <h1>Welcome</h1>
-        <div class="text-container">
-            {% lorem 3 p %}
-        </div>
-    {% endif %}
+{#    {% if user.is_authenticated %}#}
+{#        #}
+{#    {% else %}#}
+{##}
+{#    {% endif %}#}
+
 {% endblock %}

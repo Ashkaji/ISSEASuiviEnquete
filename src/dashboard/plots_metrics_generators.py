@@ -9,51 +9,52 @@ from survey_solutions_api_client.models import AssignmentsListView, UserApiDetai
 class MetricsAndPlots:
     def __init__(self, user_login: str):
         self.user: CustomUser = CustomUser.objects.get(login=user_login)
-        self.client: AuthenticatedClient = AuthenticatedClient(
-            base_url=API_URL,
-            username=API_USERNAME,
-            password=API_PASSWORD
-        )
-
-    @property
-    async def user_details(self):
-        data: UserApiDetails = await get_api_v1_users_id.sync(
-            id=self.user.login,
-            client=self.client
-        )
-        return data
-
-    @property
-    def user_assigments_detailed(self):
-        data: AssignmentsListView = get_api_v1_assignments.sync(
-            client=self.client,
-            responsible=self.user.login,
-        )
-        return data
-
-    @property
-    def user_assigments(self):
-        data: AssignmentsListView = self.user_assigments_detailed
-        return data.assignments
-
-    @property
-    def user_questionnaires_id(self):
-        user_assignments = self.user_assigments
-        return list(item.questionnaire_id for item in user_assignments)
+    #     self.client: AuthenticatedClient = AuthenticatedClient(
+    #         base_url=API_URL,
+    #         username=API_USERNAME,
+    #         password=API_PASSWORD
+    #     )
+    #
+    # @property
+    # async def user_details(self):
+    #     data: UserApiDetails = await get_api_v1_users_id.sync(
+    #         id=self.user.login,
+    #         client=self.client
+    #     )
+    #     return data
+    #
+    # @property
+    # def user_assigments_detailed(self):
+    #     data: AssignmentsListView = get_api_v1_assignments.sync(
+    #         client=self.client,
+    #         responsible=self.user.login,
+    #     )
+    #     return data
+    #
+    # @property
+    # def user_assigments(self):
+    #     data: AssignmentsListView = self.user_assigments_detailed
+    #     return data.assignments
+    #
+    # @property
+    # def user_questionnaires_id(self):
+    #     user_assignments = self.user_assigments
+    #     return list(item.questionnaire_id for item in user_assignments)
 
     def get_01_workload(self):
-        user_assignments = self.user_assigments
-        return sum(item.quantity for item in user_assignments)
+        return 20
+        # user_assignments = self.user_assigments
+        # return sum(item.quantity for item in user_assignments)
 
     def get_02_completed_interviews_number(self):
         # get_api_v1_interviews
-        pass
+        return 10
 
     def get_03_completed_interviews_percentage(self):
-        pass
+        return '50%'
 
     def get_04_completed_interviews_net_percentage(self):
-        pass
+        return '70%'
 
     def plot_01_completed_interviews_number_per_day(self):
         pass

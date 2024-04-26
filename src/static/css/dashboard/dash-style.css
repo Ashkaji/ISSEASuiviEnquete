@@ -5,6 +5,19 @@ header {
 header h1 {
 	font-weight: 400;
 	margin: 20px 0;
+	font-size: 2.75em;
+}
+
+h1 {
+	font-weight: 400;
+	margin: 20px 0;
+	font-size: 2.5em;
+}
+
+
+h2 {
+	font-size: 2em;
+	font-weight: 400;
 }
 
 .dash-part {
@@ -12,9 +25,8 @@ header h1 {
 	margin: 20px 1%;
 }
 
-h2 {
-	font-size: 2em;
-	font-weight: 400;
+.dash-part-description {
+	margin: 20px 1%;
 }
 
 div.metrics-section,
