@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-c$me!b&)-uk3_w1u)pn*maa3_ml+6-48ch7(wxk02044hvthq8
 DEBUG = True
 
 # Configurations of the client API
-API_USERNAME = 'admin'
-API_PASSWORD = 'l_W67j7wb0'
-API_URL = 'https://ashkaji-demo.mysurvey.solutions/'
+API_USERNAME = 'api'
+API_PASSWORD = 'SurveyISSEA2024@pi'
+API_URL = 'http://enq24-server.issea-cemac.org:81/'
 
 ALLOWED_HOSTS = []
 
