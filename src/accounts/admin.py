@@ -17,7 +17,6 @@ class CustomUserAdmin(admin.ModelAdmin):
 @admin.register(StudentUser)
 class StudentAdmin(admin.ModelAdmin):
     list_display = (
-        'idnumber',
         'fullname',
         'gender',
         'grade',

@@ -60,6 +60,13 @@ class CustomUser(AbstractBaseUser):
         code='invalid_login'
     )])
     fullname = models.CharField(max_length=50, blank=False, null=False, default='')
+    email = models.EmailField(blank=True)
+    phonenumber = models.CharField(max_length=16, blank=True, null=True, default='', validators=[RegexValidator(
+        regex=r'^[A-Za-z0-9_]{3,15}$',
+        message='Login name can only contain letters, digits, and underscores (3-15 characters).',
+        code='invalid_login'
+    )])
+    workspace = models.CharField(blank=True, max_length=12)
 
     groups = models.ManyToManyField(Group, blank=True)
 
@@ -77,6 +84,7 @@ class CustomUser(AbstractBaseUser):
         ),
     )
 
+    EMAIL_FIELD = "email"
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = []
 
@@ -108,9 +116,9 @@ class CustomUser(AbstractBaseUser):
 
 
 class StudentUser(CustomUser):
-    idnumber = models.CharField(max_length=10, unique=True, default='', blank=True, null=True)
     gender = models.CharField(max_length=1, default='', choices=[('F', 'Female'), ('M', 'Male')])
     grade = models.CharField(max_length=11, null=False, blank=False, default='')
+    formation = models.CharField(max_length=8, null=False, blank=False, default='')
     nationality = models.CharField(max_length=3, default='', choices=[
         ('BFA', 'Burkina Faso'),
         ('BEN', 'Bénin'),
