@@ -1,4 +1,3 @@
-import json
 from http import HTTPStatus
 from typing import Any, Dict, Optional, Union, cast
 
@@ -16,9 +15,10 @@ def _get_kwargs(
     questionnaire_id: Union[Unset, str] = UNSET,
     questionnaire_version: Union[Unset, int] = UNSET,
     status: Union[Unset, InterviewStatus] = UNSET,
+    responsible_name: Union[Unset, str] = UNSET,
     interview_id: Union[Unset, str] = UNSET,
-    page_size: Union[Unset, int] = 10,
-    page: Union[Unset, int] = 1,
+    page_size: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
 ) -> Dict[str, Any]:
     params: Dict[str, Any] = {}
 
@@ -31,6 +31,8 @@ def _get_kwargs(
         json_status = status.value
 
     params["status"] = json_status
+
+    params["responsibleName"] = responsible_name
 
     params["interviewId"] = interview_id
 
@@ -84,6 +86,7 @@ def sync_detailed(
     questionnaire_id: Union[Unset, str] = UNSET,
     questionnaire_version: Union[Unset, int] = UNSET,
     status: Union[Unset, InterviewStatus] = UNSET,
+    responsible_name: Union[Unset, str] = UNSET,
     interview_id: Union[Unset, str] = UNSET,
     page_size: Union[Unset, int] = 10,
     page: Union[Unset, int] = 1,
@@ -94,6 +97,7 @@ def sync_detailed(
         questionnaire_id (Union[Unset, str]):
         questionnaire_version (Union[Unset, int]):
         status (Union[Unset, InterviewStatus]):
+        responsible_name (Union[Unset, str]):
         interview_id (Union[Unset, str]):
         page_size (Union[Unset, int]):  Default: 10.
         page (Union[Unset, int]):  Default: 1.
@@ -110,6 +114,7 @@ def sync_detailed(
         questionnaire_id=questionnaire_id,
         questionnaire_version=questionnaire_version,
         status=status,
+        responsible_name=responsible_name,
         interview_id=interview_id,
         page_size=page_size,
         page=page,
@@ -128,6 +133,7 @@ def sync(
     questionnaire_id: Union[Unset, str] = UNSET,
     questionnaire_version: Union[Unset, int] = UNSET,
     status: Union[Unset, InterviewStatus] = UNSET,
+    responsible_name: Union[Unset, str] = UNSET,
     interview_id: Union[Unset, str] = UNSET,
     page_size: Union[Unset, int] = 10,
     page: Union[Unset, int] = 1,
@@ -138,6 +144,7 @@ def sync(
         questionnaire_id (Union[Unset, str]):
         questionnaire_version (Union[Unset, int]):
         status (Union[Unset, InterviewStatus]):
+        responsible_name (Union[Unset, str]):
         interview_id (Union[Unset, str]):
         page_size (Union[Unset, int]):  Default: 10.
         page (Union[Unset, int]):  Default: 1.
@@ -155,6 +162,7 @@ def sync(
         questionnaire_id=questionnaire_id,
         questionnaire_version=questionnaire_version,
         status=status,
+        responsible_name=responsible_name,
         interview_id=interview_id,
         page_size=page_size,
         page=page,
@@ -167,6 +175,7 @@ async def asyncio_detailed(
     questionnaire_id: Union[Unset, str] = UNSET,
     questionnaire_version: Union[Unset, int] = UNSET,
     status: Union[Unset, InterviewStatus] = UNSET,
+    responsible_name: Union[Unset, str] = UNSET,
     interview_id: Union[Unset, str] = UNSET,
     page_size: Union[Unset, int] = 10,
     page: Union[Unset, int] = 1,
@@ -177,6 +186,7 @@ async def asyncio_detailed(
         questionnaire_id (Union[Unset, str]):
         questionnaire_version (Union[Unset, int]):
         status (Union[Unset, InterviewStatus]):
+        responsible_name: Union[Unset, str] = UNSET,
         interview_id (Union[Unset, str]):
         page_size (Union[Unset, int]):  Default: 10.
         page (Union[Unset, int]):  Default: 1.
@@ -193,6 +203,7 @@ async def asyncio_detailed(
         questionnaire_id=questionnaire_id,
         questionnaire_version=questionnaire_version,
         status=status,
+        responsible_name=responsible_name,
         interview_id=interview_id,
         page_size=page_size,
         page=page,
@@ -209,6 +220,7 @@ async def asyncio(
     questionnaire_id: Union[Unset, str] = UNSET,
     questionnaire_version: Union[Unset, int] = UNSET,
     status: Union[Unset, InterviewStatus] = UNSET,
+    responsible_name: Union[Unset, str] = UNSET,
     interview_id: Union[Unset, str] = UNSET,
     page_size: Union[Unset, int] = 10,
     page: Union[Unset, int] = 1,
@@ -219,6 +231,7 @@ async def asyncio(
         questionnaire_id (Union[Unset, str]):
         questionnaire_version (Union[Unset, int]):
         status (Union[Unset, InterviewStatus]):
+        responsible_name: Union[Unset, str] = UNSET,
         interview_id (Union[Unset, str]):
         page_size (Union[Unset, int]):  Default: 10.
         page (Union[Unset, int]):  Default: 1.
@@ -237,6 +250,7 @@ async def asyncio(
             questionnaire_id=questionnaire_id,
             questionnaire_version=questionnaire_version,
             status=status,
+            responsible_name=responsible_name,
             interview_id=interview_id,
             page_size=page_size,
             page=page,
