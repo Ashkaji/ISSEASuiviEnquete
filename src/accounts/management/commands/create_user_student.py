@@ -31,8 +31,7 @@ class Command(BaseCommand):
 
             for row in reader:
                 with transaction.atomic():  # Keep each object creation within a transaction
-                    student = StudentUser(**row)
-                    student.save()
+                    StudentUser.objects.create_user(**row)
 
         self.stdout.write(self.style.SUCCESS(f'Successfully created StudentUser objects.'))
 
