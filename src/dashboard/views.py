@@ -68,7 +68,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             if section['section_type'] == 'plots':
                 for bloc in section['section_data']:
                     method = getattr(generator, section_methods['plots'][position])
-                    bloc['plots'] = method()
+                    bloc['plot'] = method()
                     position += 1
 
         return sections_skeleton
