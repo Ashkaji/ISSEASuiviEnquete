@@ -3,10 +3,9 @@
 
 {% block additional-style %}
     <link rel="stylesheet" href="{% static 'css/dashboard/dash-style.css' %}">
-{% endblock additional-style %}
-
 {% block additional-dash-style %}
 {% endblock %}
+{% endblock additional-style %}
 
 {% block header %}
 
@@ -17,8 +16,8 @@
 {% endblock %}
 
 {% block additional-scripts %}
-    <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/dashboard/dashboard.js' %}"></script>
+    {% block additional-dash-script %}
+    {% endblock %}
 {% endblock %}
 
-{% block additional-dash-script %}
-{% endblock %}

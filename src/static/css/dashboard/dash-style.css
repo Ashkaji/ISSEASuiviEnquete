@@ -17,7 +17,10 @@ h1 {
 
 h2 {
 	font-size: 2em;
-	font-weight: 400;
+}
+
+h2.metric-value {
+	font-weight: bold;
 }
 
 .dash-part {
@@ -48,13 +51,14 @@ div.plots-block {
 }
 
 div.metrics-block {
-    flex: 1 0 22%; /* Each item takes up 50% of the width (2 items per row) */
+    flex: 1 0 23%; /* Each item takes up 50% of the width (2 items per row) */
     padding: 20px;
     box-sizing: border-box;
 	margin: 10px 1%;
 	border-radius: 15px;
 	background: white;
 	transition: all 0.4s ease;
+	position: relative;
 }
 
 div.metrics-block:hover {
@@ -65,6 +69,15 @@ div.metrics-block:hover {
 div.metrics-block:hover,
 div.plots-block:hover {
 	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.metric-main .metric-value {
+	font-weight: bold;
+}
+
+div.metric-main h2{
+	font-weight: bold;
+	font-size : 3em;
 }
 
 div.geographic-section {
@@ -87,4 +100,6 @@ div.geographic-section {
         flex: 1 0 90%; /* Each item takes up 100% width on smaller screens (1 item per row) */
     }
 }
+
+
 

@@ -10,7 +10,9 @@
 <body>
 
     <nav class="tag-color-changing">
-        {% include 'includes/navigation.html' %}
+        {% block nav %}
+            {% include 'includes/navigation.html' %}
+        {% endblock %}
     </nav>
 
     <header>

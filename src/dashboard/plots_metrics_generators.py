@@ -1,8 +1,9 @@
-from turtle import width
-
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
+import plotly.io as pio
+
+pio.templates.default = "none"
 
 from ISSEASuiviEnquete.settings import API_URL, API_USERNAME, API_PASSWORD
 from accounts.models import CustomUser
@@ -12,6 +13,10 @@ from survey_solutions_api_client.api.interviews import (
     get_api_v1_interviews,
     get_api_v1_interviews_id,
     get_api_v1_interviews_id_stats
+)
+from survey_solutions_api_client.api.questionnaires import(
+    get_api_v1_questionnaires,
+    get_api_v1_questionnaires_id_version_interviews
 )
 from survey_solutions_api_client.models import AssignmentsListView
 
@@ -40,14 +45,28 @@ class MetricsAndPlots:
 
     @property
     def user_interviews(self):
-        all_interviews = get_api_v1_interviews.sync(client=self.client)
-        user_interviews = list(interview for interview in all_interviews.interviews
-                               if interview.responsible_name == self.user.login)
-        return user_interviews
+        all_questionnaires = [(quest.questionnaire_id, quest.version) for quest in
+                              get_api_v1_questionnaires.sync(client=self.client).questionnaires]
+        all_interviews = {}
+        for iden, version in all_questionnaires:
+            off = 1
+            interviews_qver = get_api_v1_questionnaires_id_version_interviews.sync(
+                iden, version, client=self.client, offset=off).interviews
+            while len(interviews_qver) > 0:
+                for interview in interviews_qver:
+                    if (interview.interview_id not in all_interviews) and (interview.responsible_name == self.user.login):
+                        all_interviews[interview.interview_id] = [interview.last_entry_date,
+                                                                  interview.featured_questions[0].answer,
+                                                                  interview.featured_questions[1].answer,
+                                                                  interview.featured_questions[2].answer]
+                interviews_qver = get_api_v1_questionnaires_id_version_interviews.sync(
+                    iden, version, client=self.client, offset=off).interviews
+                off += 1
+        return all_interviews
 
     @property
     def user_interviews_id(self):
-        return list(i.interview_id for i in self.user_interviews)
+        return self.user_interviews.keys()
 
     @property
     def user_interviews_answers(self):
@@ -61,16 +80,9 @@ class MetricsAndPlots:
 
     @property
     def user_dash_data(self) -> pd.DataFrame:
-        data = [
-            [item.last_entry_date,
-             item.featured_questions[0].answer,
-             item.featured_questions[1].answer,
-             item.featured_questions[2].answer]
-            for item in self.user_interviews
-        ]
+        data = list(self.user_interviews.values())
         durations = list(item.interview_duration for item in self.user_interviews_stats)
-        f_status = lambda x: x[-3].answer if x[-4].answer in ['Partiellement rempli', 'Partially filled'] else x[
-            -4].answer
+        f_status = lambda x: x[-3].answer if x[-4].answer in ['Partiellement rempli', 'Partially filled'] else x[-4].answer
         status = list(f_status(answer) for answer in self.user_interviews_answers)
         appreciation = list(i[-1].answer for i in self.user_interviews_answers)
         for idx, item in enumerate(durations):
@@ -86,7 +98,7 @@ class MetricsAndPlots:
         ])
 
         dash_data.insert(1, column='date', value=dash_data.dates.dt.date)
-        # Sort and set index in a single step using chained methods
+
         return dash_data.sort_values(
             by=['dates', 'arrondissement', 'enumeration_area', 'household_eanumber']
         )
@@ -123,7 +135,22 @@ class MetricsAndPlots:
         return fig.to_html(full_html=False, include_plotlyjs='cdn')
 
     def plot_02_completed_interviews_cumulative_number(self):
-        pass
+        data = self.user_dash_data['date'].value_counts().sort_index().cumsum()
+        fig = go.Figure()
+        fig.add_trace(
+            go.Scatter(
+                x=data.index,
+                y=data.values,
+                mode='lines+markers',
+            )
+        )
+        fig.update_layout(
+            height=300,
+            xaxis_title='Date',
+            yaxis_title='Enquêtés',
+            margin=dict(l=0, r=0, t=0, b=0)
+        )
+        return fig.to_html(full_html=False, include_plotlyjs='cdn')
 
     def plot_03_visited_households_status(self):
         pass

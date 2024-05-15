@@ -58,10 +58,27 @@
                                 <h5 class = "metric-title">{{ bloc.title }}</h5>
                                 <i class = "metric-icon">{{ bloc.icon }}</i>
                             </div>
+                            {% if section_counter == 5 and bloc_counter < 3 %}
+                                <div class = "metric-main">
+                                    <h2 class = "metric-value">20</h2><span>m</span> <h2 class = "metric-value">0</h2><span>s</span>
+                                </div>
+                                <div class = "zd-metric-section">
+                                    <div class = "zd-metric">
+                                        <div class ="zd-metric-i">
+                                            <h4 class = "zd-metric-value">10</h4><span>m</span>
+                                        </div>
+                                        <div class ="zd-metric-i">
+                                            <h4 class = "zd-metric-value">0</h4><span>s</span>
+                                        </div>
+                                    </div>
+                                    <span class = "arrow"></span>
+                                </div>
+                            {% else %}
                             <div class = "metric-main">
                                 <h2 class = "metric-value">{{ bloc.value }}</h2>
                                 <h5 class = "metric-unit">{{ bloc.unit }}</h5>
                             </div>
+                            {% endif %}
                         {% elif section.section_type == 'plots' %}
                             <h5 class = "plot-title">{{ bloc.title }}</h5>
                             <div class = "plot">{{ bloc.plot | safe }}</div>
@@ -75,4 +92,8 @@
             </div>
         {% endwith %}
     {% endfor %}
+{% endblock %}
+
+{% block additional-dash-script %}
+    <script type="text/javascript" src="{% static 'js/dashboard/supervisor.js' %}"></script>
 {% endblock %}

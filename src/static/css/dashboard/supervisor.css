@@ -1,0 +1,44 @@
+div.metric-main h2{
+	font-weight: bold;
+	font-size : 3em;
+}
+
+
+
+.metric-main h2, span{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+div.zd-metric-section div.zd-metric, span.arrow{
+	display : inline-block;
+}
+
+
+div.metrics-block:hover div.zd-metric-section {
+	color: var(--slight-grey-color);
+}
+
+div.zd-metric-section {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	box-sizing: border-box;
+    padding: 0 12px 25px 0;
+    border-radius: 0px 20px 20px 0;
+}
+
+div.zd-metric-section, div.zd-metric-i{
+	display : inline-block;
+	margin : 0;
+	line-height: 10px;
+}
+
+
+div.zd-metric span, h4.zd-metric-value{
+	display : inline-block;
+	margin : 0;
+	padding: 0;
+	font-size : 0.8em;
+}

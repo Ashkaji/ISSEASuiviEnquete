@@ -37,7 +37,7 @@ def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, InterviewApiView]]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = InterviewApiView.from_dict(response.text)
+        response_200 = InterviewApiView.from_dict(response.json())
 
         return response_200
     if response.status_code == HTTPStatus.UNAUTHORIZED:

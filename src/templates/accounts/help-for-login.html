@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Help for login</title>
-</head>
-<body>
-Vous devez entrer les informations suivantes:
-<ol>
-    <li>Votre identifiant:
+{% extends 'base.html' %}
+{% load static %}
+
+{% block additional-style %}
+    <link rel="stylesheet" href="{% static 'css/help-for-login.css' %}">
+{% endblock additional-style %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+    <h1>Comment se connecter</h1>
+    <p>
+        Pour accéder aux fonctionnalités de l'application de suivi de la collecte,
+        veuillez suivre ces étapes simples pour vous connecter :
+    </p>
+
+    <ol>
+        <li>Cliquez sur le lien <a href="{% url 'login' %}">Se Connecter</a> situé en haut à droite de la page d'accueil.</li>
+        <li>Sur la page de connexion, saisissez votre nom d'utilisateur dans le champ "Nom d'utilisateur".</li>
+        <li>Entrez votre mot de passe dans le champ "Mot de passe".</li>
+        <li>Cliquez sur le bouton "Connexion" pour accéder à votre compte.</li>
+    </ol>
+
+    <h2>Conseils pour une connexion réussie :</h2>
     <ul>
-        <li>Enquêteur: EXXX</li>
-        <li>Controleur: CXXX</li>
-        <li>Superviseur Assistant: SAXXX</li>
-        <li>Superviseur: SXXX</li>
+        <li>Assurez-vous que le verrouillage des majuscules est désactivé.</li>
+        <li>Vérifiez que vous utilisez le bon nom d'utilisateur et le bon mot de passe.</li>
+        <li>Si vous avez oublié votre mot de passe, <a href = "https://wa.me/+237695096453">contacter l'administrateur</a> pour le réinitialiser.</li>
     </ul>
-    </li>
-    <li>Votre mot de passe:
+
+    <p>
+        Si vous rencontrez des difficultés pour vous connecter, veuillez consulter la section <a href="#aide">problèmes de connexion</a> ou en cas de
+        difficulté majeure, <a href = "https://wa.me/+237695096453">contacter l'administrateur</a>.
+    </p>
+
+    <h1 id = "aide">Problèmes de connexion</h1>
+    <p>
+        Si vous rencontrez des difficultés pour vous connecter à votre compte, voici quelques conseils :
+    </p>
     <ul>
-        <li>Enquêteur: 1111</li>
-        <li>Controleur: 2222</li>
-        <li>Superviseur Assistant: 3333</li>
-        <li>Superviseur: 4444</li>
+        <li><strong>Vérifiez votre nom d'utilisateur et votre mot de passe :</strong> Assurez-vous que vous avez saisi les informations correctes, en respectant les majuscules et les minuscules.</li>
+        <li><strong>Consulter le mail que vous avez reçu indiquant votre login :</strong> Veuillez ouvrir vos mails et consulter le mail que vous avez reçu de l'administrateur <strong>@hunnakey</strong> vous indiquant vos accès à l'application</li>
+        <li><strong>Vérifiez votre connexion Internet :</strong> Assurez-vous que vous avez une connexion Internet stable.</li>
+        <li><strong>Effacez le cache et les cookies de votre navigateur :</strong> Parfois, les données mises en cache peuvent interférer avec la connexion. Essayez d'effacer le cache et les cookies de votre navigateur.</li>
     </ul>
-    </li>
-</ol>
-<p>Click <a href="{% url 'login' %}">here</a> to sign in again.</p>
-</body>
-</html>
+
+    <h2>Problèmes techniques</h2>
+    <p>
+        Si vous rencontrez des problèmes techniques sur le site web, tels que des pages qui ne se chargent pas ou des fonctionnalités qui ne fonctionnent pas correctement, voici quelques mesures que vous pouvez prendre :
+    </p>
+    <ul>
+        <li><strong>Actualisez la page :</strong> Parfois, un simple rechargement de la page peut résoudre le problème.</li>
+        <li><strong>Essayez un autre navigateur :</strong> Si le problème persiste, essayez d'accéder au site web à partir d'un autre navigateur (par exemple, Chrome, Firefox, Safari).</li>
+        <li><strong>Vérifiez les mises à jour du navigateur :</strong> Assurez-vous que votre navigateur est à jour avec la dernière version.</li>
+        <li><strong>Redémarrez votre ordinateur :</strong> Le redémarrage de votre ordinateur peut parfois résoudre des problèmes techniques.</li>
+    </ul>
+
+    <h2>Contacter l'administrateur</h2>
+    <p>
+        Si vous ne trouvez pas de solution à votre problème dans cette page d'aide, n'hésitez pas à <a href = "https://wa.me/+237695096453">contacter l'administrateur</a> qui se fera un plaisir de vous aider.
+    </p>
+{% endblock %}

@@ -34,7 +34,7 @@ def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[Any, ValidationProblemDetails]]:
     if response.status_code == HTTPStatus.BAD_REQUEST:
-        response_400 = ValidationProblemDetails.from_dict(response.text)
+        response_400 = ValidationProblemDetails.from_dict(response.json())
 
         return response_400
     if response.status_code == HTTPStatus.OK:
