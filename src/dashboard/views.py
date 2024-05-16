@@ -79,5 +79,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
         section_to_render = self.get_sections_skeleton_filled()
 
+        print(self.get_metrics_and_plots_generator().user_dash_data)
+
         context['sections'] = section_to_render
         return context
