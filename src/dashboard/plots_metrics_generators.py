@@ -43,7 +43,6 @@ class MetricsAndPlots:
 
     @property
     def user_questionnaires(self):
-        # Cache questionnaires data (adjust timeout as needed)
         cache_key = "user_questionnaires"
         questionnaires_data = cache.get(cache_key)
         if questionnaires_data is None:
@@ -53,23 +52,27 @@ class MetricsAndPlots:
 
     @property
     def user_interviews(self):
-        all_questionnaires = [(quest.questionnaire_id, quest.version) for quest in self.user_questionnaires]
-        all_interviews = {}
-        for iden, version in all_questionnaires:
-            off = 1
-            interviews_qver = get_api_v1_questionnaires_id_version_interviews.sync(
-                iden, version, client=self.client, offset=off).interviews
-            while len(interviews_qver) > 0:
-                for interview in interviews_qver:
-                    if (interview.interview_id not in all_interviews) and (
-                            interview.responsible_name == self.user.login):
-                        all_interviews[interview.interview_id] = [interview.last_entry_date,
-                                                                  interview.featured_questions[0].answer,
-                                                                  interview.featured_questions[1].answer,
-                                                                  interview.featured_questions[2].answer]
+        cache_key = f"user_interviews_{self.user.login}"
+        all_interviews = cache.get(cache_key)
+        if all_interviews is None:
+            all_questionnaires = [(quest.questionnaire_id, quest.version) for quest in self.user_questionnaires]
+            all_interviews = {}
+            for iden, version in all_questionnaires:
+                off = 1
                 interviews_qver = get_api_v1_questionnaires_id_version_interviews.sync(
                     iden, version, client=self.client, offset=off).interviews
-                off += 1
+                while len(interviews_qver) > 0:
+                    for interview in interviews_qver:
+                        if (interview.interview_id not in all_interviews) and (
+                                interview.responsible_name == self.user.login):
+                            all_interviews[interview.interview_id] = [interview.last_entry_date,
+                                                                      interview.featured_questions[0].answer,
+                                                                      interview.featured_questions[1].answer,
+                                                                      interview.featured_questions[2].answer]
+                    interviews_qver = get_api_v1_questionnaires_id_version_interviews.sync(
+                        iden, version, client=self.client, offset=off).interviews
+                    off += 1
+            cache.set(cache_key, all_interviews, timeout=300)
         return all_interviews
 
     @property
@@ -88,32 +91,36 @@ class MetricsAndPlots:
 
     @property
     def user_dash_data(self) -> pd.DataFrame:
-        data = list(self.user_interviews.values())
-        durations = list(item.interview_duration for item in self.user_interviews_stats)
-        f_status = lambda x: x[-2].answer if x[-3].answer in ['Partiellement rempli', 'Partially filled'] else x[
-            -3].answer
-        status = list(f_status(answer) for answer in self.user_interviews_answers)
-        survey_solutions_status = list(item.status for item in self.user_interviews_stats)
-        appreciation = list(i[-1].answer for i in self.user_interviews_answers)
-        for idx, item in enumerate(durations):
-            data[idx].append(item)
-        for idx, item in enumerate(status):
-            data[idx].append(item)
-        for idx, item in enumerate(survey_solutions_status):
-            data[idx].append(item)
-        for idx, item in enumerate(appreciation):
-            data[idx].append(item)
+        cache_key = f"user_dash_data_{self.user.login}"
+        dash_data = cache.get(cache_key)
+        if dash_data is None:
+            data = list(self.user_interviews.values())
+            durations = list(item.interview_duration for item in self.user_interviews_stats)
+            f_status = lambda x: x[-2].answer if x[-3].answer in ['Partiellement rempli', 'Partially filled'] else x[-3].answer
+            status = list(f_status(answer) for answer in self.user_interviews_answers)
+            survey_solutions_status = list(item.status for item in self.user_interviews_stats)
+            appreciation = list(i[-1].answer for i in self.user_interviews_answers)
+            for idx, item in enumerate(durations):
+                data[idx].append(item)
+            for idx, item in enumerate(status):
+                data[idx].append(item)
+            for idx, item in enumerate(survey_solutions_status):
+                data[idx].append(item)
+            for idx, item in enumerate(appreciation):
+                data[idx].append(item)
 
-        dash_data = pd.DataFrame(data, columns=[
-            'dates', 'arrondissement', 'enumeration_area', 'household_eanumber',
-            'durations', 'status', 'survey_solutions_status', 'appreciation'
-        ])
+            dash_data = pd.DataFrame(data, columns=[
+                'dates', 'arrondissement', 'enumeration_area', 'household_eanumber',
+                'durations', 'status', 'survey_solutions_status', 'appreciation'
+            ])
 
-        dash_data.insert(1, column='date', value=dash_data.dates.dt.date)
+            dash_data.insert(1, column='date', value=dash_data.dates.dt.date)
 
-        return dash_data.sort_values(
-            by=['dates', 'arrondissement', 'enumeration_area', 'household_eanumber']
-        )
+            dash_data = dash_data.sort_values(
+                by=['dates', 'arrondissement', 'enumeration_area', 'household_eanumber']
+            )
+            cache.set(cache_key, dash_data, timeout=300)
+        return dash_data
 
     def get_01_workload(self):
         return self.user_assignments_detailed.total_count  # sum(item.quantity for item in self.user_assignments)
