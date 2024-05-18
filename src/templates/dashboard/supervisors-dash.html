@@ -14,7 +14,6 @@
         l’application au quartier général (sdu nombre de ménages enquêtés, etc.)</p>
 {% endblock %}
 
-{#Ne pas oublier de contruire les indicqteurs specifique en chisissqnt pqr defqut un enqueteur qu hqsqrd#}
 {% block content %}
     {% for section in sections %}
         {% with section_counter=forloop.counter %}
@@ -34,12 +33,19 @@
                 <p></p>
             </div>
             {% elif section_counter == 5 %}
-            <h1 class="dash-part">Comportement spécifique de mes enquêteurs</h1>
+            <h1 class="dash-part interviewer-select">Comportement spécifique de mes enquêteurs</h1>
             <div class="dash-part-description">
                 <p>Cette section présente les indicateurs de suivi relatifs à chaque enqueteur.</p>
                 <p>Il serait interressant de comparer ces indicateurs à ceux de la ZD afin de déterminer
                     ou de soupçonner si l’enquêteur est un enquêteur à risque.</p>
             </div>
+                {% if form %}
+                    <form method="post" id="interviewer-form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </form>
+                {% endif %}
+            <p id="ajax-selected"></p>
             {% elif section_counter == 8 %}
             <h1 class="dash-part">Carte de la zone à couvrir</h1>
             <div class="dash-part-description">
@@ -60,15 +66,15 @@
                             </div>
                             {% if section_counter == 5 and bloc_counter < 3 %}
                                 <div class = "metric-main">
-                                    <h2 class = "metric-value">20</h2><span>m</span> <h2 class = "metric-value">0</h2><span>s</span>
+                                    <h2 class = "metric-value"></h2><span>m</span> <h2 class = "metric-value"></h2><span>s</span>
                                 </div>
                                 <div class = "zd-metric-section">
                                     <div class = "zd-metric">
                                         <div class ="zd-metric-i">
-                                            <h4 class = "zd-metric-value">10</h4><span>m</span>
+                                            <h4 class = "zd-metric-value"></h4><span>m</span>
                                         </div>
                                         <div class ="zd-metric-i">
-                                            <h4 class = "zd-metric-value">0</h4><span>s</span>
+                                            <h4 class = "zd-metric-value"></h4><span>s</span>
                                         </div>
                                     </div>
                                     <span class = "arrow"></span>
@@ -96,4 +102,35 @@
 
 {% block additional-dash-script %}
     <script type="text/javascript" src="{% static 'js/dashboard/supervisor.js' %}"></script>
+    <script>
+document.querySelector("#interviewer-id").addEventListener("change", event => {
+    event.preventDefault();
+    let form = document.querySelector("#interviewer-form");
+    let formData = new FormData(form);
+    let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const request = new Request('{% url "dashboard" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrfTokenValue,
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    });
+    fetch(request)
+        .then(response => response.json())
+        .then(result => {
+            const resultElement = document.querySelector("h1.dash-part.interviewer-select");
+            resultElement.innerHTML = `Comportement spécifique de ${result["interviewer_selected"]}`;
+            const elements = document.querySelectorAll(".metric-main .metric-value + span");
+            let mean_duration_minutes = elements[0].previousElementSibling;
+            let mean_duration_seconds = elements[1].previousElementSibling;
+            let total_duration_minutes = elements[2].previousElementSibling;
+            let total_duration_seconds = elements[3].previousElementSibling;
+            mean_duration_minutes.textContent = result["mean_duration_minutes"];
+            mean_duration_seconds.textContent = result["mean_duration_seconds"];
+            total_duration_minutes.textContent = result["total_duration_minutes"];
+            total_duration_seconds.textContent = result["total_duration_seconds"];
+        })
+})
+</script>
 {% endblock %}

@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
@@ -22,6 +25,20 @@ from survey_solutions_api_client.models import AssignmentsListView
 pio.templates.default = "plotly_white"
 
 
+def get_time_intervals(start_datetime, end_datetime):
+    if start_datetime > end_datetime:
+        raise ValueError("Start datetime should be older than end datetime")
+
+    time_intervals = []
+
+    current_time = start_datetime
+    while current_time <= end_datetime:
+        time_intervals.append((current_time.hour, current_time.minute))
+        current_time += timedelta(minutes=1)
+
+    return time_intervals
+
+
 class MetricsAndPlots:
     def __init__(self, user_login: str):
         self.user: CustomUser = CustomUser.objects.get(login=user_login)
@@ -38,7 +55,7 @@ class MetricsAndPlots:
         assignments_data = cache.get(cache_key)
         if assignments_data is None:
             assignments_data = get_api_v1_assignments.sync(client=self.client, responsible=self.user.login)
-            cache.set(cache_key, assignments_data, timeout=3600)  # Cache for 1 hour
+            cache.set(cache_key, assignments_data, timeout=300)
         return assignments_data
 
     @property
@@ -47,7 +64,7 @@ class MetricsAndPlots:
         questionnaires_data = cache.get(cache_key)
         if questionnaires_data is None:
             questionnaires_data = get_api_v1_questionnaires.sync(client=self.client).questionnaires
-            cache.set(cache_key, questionnaires_data, timeout=3600)  # Cache for 1 hour
+            cache.set(cache_key, questionnaires_data, timeout=300)
         return questionnaires_data
 
     @property
@@ -96,7 +113,8 @@ class MetricsAndPlots:
         if dash_data is None:
             data = list(self.user_interviews.values())
             durations = list(item.interview_duration for item in self.user_interviews_stats)
-            f_status = lambda x: x[-2].answer if x[-3].answer in ['Partiellement rempli', 'Partially filled'] else x[-3].answer
+            f_status = lambda x: x[-2].answer if x[-3].answer in ['Partiellement rempli', 'Partially filled'] else x[
+                -3].answer
             status = list(f_status(answer) for answer in self.user_interviews_answers)
             survey_solutions_status = list(item.status for item in self.user_interviews_stats)
             appreciation = list(i[-1].answer for i in self.user_interviews_answers)
@@ -119,14 +137,24 @@ class MetricsAndPlots:
             dash_data = dash_data.sort_values(
                 by=['dates', 'arrondissement', 'enumeration_area', 'household_eanumber']
             )
+
+            map_status = {
+                'Completely filled': 'Entièrement rempli',
+                'Refusal': 'Refus',
+                'Dwelling destroyed/not found': 'Logement détruit/non trouvé',
+                'Long-term absence': 'Absence de longue durée'
+            }
+
+            dash_data.status = dash_data.status.apply(lambda x: map_status[x] if x in map_status else x)
+
             cache.set(cache_key, dash_data, timeout=300)
         return dash_data
 
     def get_01_workload(self):
-        return self.user_assignments_detailed.total_count  # sum(item.quantity for item in self.user_assignments)
+        return self.user_assignments_detailed.total_count
 
     def get_02_completed_interviews_number(self):
-        completed = self.user_dash_data.status.isin(['Entièrement rempli', 'Completely filled']).sum()
+        completed = self.user_dash_data.status.isin(['Entièrement rempli']).sum()
         rejected = self.user_dash_data.survey_solutions_status.isin(
             ['RejectedByHeadquarters', 'RejectedBySupervisor', 'Deleted']).sum()
         return completed - rejected
@@ -181,6 +209,7 @@ class MetricsAndPlots:
             hole=.3
         )
         fig.update_layout(
+            height=300,
             margin=dict(l=20, r=2, t=0, b=0),
             legend=dict(
                 y=0.5,
@@ -200,6 +229,7 @@ class MetricsAndPlots:
             labels={'enumeration_area': 'No ZD', 'count': 'Effectifs'}
         )
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -224,6 +254,7 @@ class MetricsAndPlots:
             )
 
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -234,12 +265,11 @@ class MetricsAndPlots:
         return fig.to_html(full_html=False, include_plotlyjs='cdn')
 
     def plot_06_completed_interviews_cumulative_number_per_ea(self):
-        data = self.user_dash_data[['enumeration_area', 'date']].value_counts().sort_index().cumsum()
+        data = self.user_dash_data[['enumeration_area', 'date']].value_counts().sort_index()
 
         fig = go.Figure()
-
         for ea in sorted(data.index.get_level_values('enumeration_area').unique()):
-            sub_data = data[ea]
+            sub_data = data[ea].cumsum()
             fig.add_trace(
                 go.Scatter(
                     x=sub_data.index,
@@ -250,6 +280,7 @@ class MetricsAndPlots:
             )
 
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -264,6 +295,8 @@ class MetricsAndPlots:
 
 
 class SupervisorMetricsAndPlots(MetricsAndPlots):
+    def __init__(self, user_login: str):
+        super().__init__(user_login)
 
     @property
     def get_team_members(self):
@@ -310,18 +343,19 @@ class SupervisorMetricsAndPlots(MetricsAndPlots):
         data = self.user_dash_data[['interviewer', 'date']].value_counts().sort_index()
 
         fig = go.Figure()
-        for ea in sorted(data.index.get_level_values('interviewer').unique()):
-            sub_data = data[ea]
+        for interviewer in sorted(data.index.get_level_values('interviewer').unique()):
+            sub_data = data[interviewer]
             fig.add_trace(
                 go.Scatter(
                     x=sub_data.index,
                     y=sub_data.values,
                     mode='lines+markers',
-                    name='ZD No' + str(ea)
+                    name='Enquêteur No ' + str(interviewer)
                 )
             )
 
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -333,21 +367,22 @@ class SupervisorMetricsAndPlots(MetricsAndPlots):
 
     # Cumul du nombre de ménages enquêtés par jour et par enquêteur
     def plot_06_completed_interviews_cumulative_number_per_ea(self):
-        data = self.user_dash_data[['interviewer', 'date']].value_counts().sort_index().cumsum()
+        data = self.user_dash_data[['interviewer', 'date']].value_counts().sort_index()
 
         fig = go.Figure()
-        for ea in sorted(data.index.get_level_values('interviewer').unique()):
-            sub_data = data[ea]
+        for interviewer in sorted(data.index.get_level_values('interviewer').unique()):
+            sub_data = data[interviewer].cumsum()
             fig.add_trace(
                 go.Scatter(
                     x=sub_data.index,
                     y=sub_data.values,
                     mode='lines+markers',
-                    name='ZD No' + str(ea)
+                    name='Enquêteur No ' + str(interviewer)
                 )
             )
 
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -373,6 +408,7 @@ class SupervisorMetricsAndPlots(MetricsAndPlots):
             labels={'interviewer': 'No Enquêteur', 'count': 'Effectifs'}
         )
         fig.update_layout(
+            height=300,
             margin=dict(l=0, r=0, t=0, b=30),
             legend=dict(
                 xanchor='left',
@@ -381,11 +417,27 @@ class SupervisorMetricsAndPlots(MetricsAndPlots):
         )
         return fig.to_html(full_html=False, include_plotlyjs='cdn')
 
-    def get_05_interviews_duration_mean(self):
-        pass
+    def get_05_interviews_duration_mean(self, selected_interviewer):
+        interviewer_data = self.user_dash_data[self.user_dash_data.interviewer.eq(selected_interviewer)]
+        total_seconds = pd.to_timedelta(interviewer_data['durations']).dt.total_seconds().mean()
 
-    def get_06_interviews_duration_total(self):
-        pass
+        if pd.isna(total_seconds):
+            return "00:00"
+
+        minutes = int(total_seconds // 60)
+        seconds = int(total_seconds % 60)
+        return f"{minutes:02}:{seconds:02}"
+
+    def get_06_interviews_duration_total(self, selected_interviewer):
+        interviewer_data = self.user_dash_data[self.user_dash_data.interviewer.eq(selected_interviewer)]
+        total_seconds = pd.to_timedelta(interviewer_data['durations']).dt.total_seconds().sum()
+
+        if pd.isna(total_seconds):
+            return "00:00"
+
+        minutes = int(total_seconds // 60)
+        seconds = int(total_seconds % 60)
+        return f"{minutes:02}:{seconds:02}"
 
     def get_07_surveyed_households_without_gps_number(self):
         pass
@@ -394,8 +446,46 @@ class SupervisorMetricsAndPlots(MetricsAndPlots):
         pass
 
     # Diagramme d'activité
-    def plot_10_activity_diagram(self):
-        pass
+    def plot_10_activity_diagram(self, selected_interviewer):
+        interviewer_data = self.user_dash_data[self.user_dash_data.interviewer.eq(selected_interviewer)][
+            ['dates', 'durations']]
+        interviewer_data.rename(columns={'dates': 'end_date'}, inplace=True)
+        # interviewer_data['end_date'] = pd.to_datetime(interviewer_data['end_date'])
+        interviewer_data['durations'] = pd.to_timedelta(interviewer_data['durations'])
+        interviewer_data['start_date'] = interviewer_data['end_date'] - interviewer_data['durations']
+        interviewer_data.drop(columns='durations', inplace=True)
+
+        activity_grid = np.zeros((24, 60))
+
+        # Fill the activity grid
+        for index, row in interviewer_data.iterrows():
+            start = row['start_date']
+            end = row['end_date']
+            all_times = get_time_intervals(start, end)
+            for heure, minutes in all_times:
+                activity_grid[heure, minutes] = 1
+
+        fig = go.Figure(data=go.Heatmap(
+            z=activity_grid,
+            x=list(range(60)),
+            y=list(range(24)),
+            colorscale=[
+                [0, 'black'],
+                [1, 'green']
+            ],
+            zmin=0,
+            zmax=1,
+            showscale=False,
+            hovertemplate="Heure: %{y}:%{x}<br>Intensité d'activité: %{z}",
+        ))
+
+        # Update layout
+        fig.update_layout(
+            xaxis=dict(title='Minutes', tickmode='array', tickvals=list(range(0, 60, 1))),
+            yaxis=dict(title='Heures', tickmode='array', tickvals=list(range(0, 24, 1))),
+            plot_bgcolor='white',
+            margin=dict(l=0, r=0, t=0, b=0)
+        )
 
     # Durée d’administration du questionnaire par enquêteurs
     def plot_11_interviews_duration(self):

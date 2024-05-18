@@ -1,12 +1,14 @@
+import inspect
 import pickle
-
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
+from django.http import JsonResponse
 from django.views.generic import TemplateView
-
+from accounts.models import CustomUser
+from dashboard.forms import InterviewerSelectForm
 from dashboard.plots_metrics_generators import MetricsAndPlots, SupervisorMetricsAndPlots, HeadquatersMetricsAndPlots
 
 
-# Create your views here.
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = None
 
@@ -25,7 +27,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             return 'base'
 
     def dispatch(self, request, *args, **kwargs):
-        return super(DashboardView, self).dispatch(request, *args, **kwargs)
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return self.handle_ajax(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_template_names(self):
         return f'dashboard/{self.current_user_group}-dash.html'
@@ -60,7 +64,11 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             if section['section_type'] == 'metrics':
                 for bloc in section['section_data']:
                     method = getattr(generator, section_methods['metrics'][position])
-                    bloc['value'] = method()
+                    if 'selected_interviewer' in inspect.signature(method).parameters:
+                        selected_interviewer = self.request.POST.get('interviewer', None)
+                        bloc['value'] = method(selected_interviewer=selected_interviewer)
+                    else:
+                        bloc['value'] = method()
                     position += 1
 
         position = 0
@@ -75,11 +83,41 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.template_name = self.get_template_names()
 
+        self.template_name = self.get_template_names()
         section_to_render = self.get_sections_skeleton_filled()
 
-        print(self.get_metrics_and_plots_generator().user_dash_data)
+        if self.current_user_group == 'Supervisors':
+            interviewer_choices = [
+                (interviewer.login, interviewer.fullname) for interviewer in
+                CustomUser.objects.filter(Q(supervisor=self.current_user.login))
+            ]
+            if self.request.method == 'POST':
+                form = InterviewerSelectForm(self.request.POST, interviewer_choices=interviewer_choices)
+                if form.is_valid():
+                    selected_interviewer = form.cleaned_data['interviewer']
+            else:
+                form = InterviewerSelectForm(interviewer_choices=interviewer_choices)
 
+            context['form'] = form
         context['sections'] = section_to_render
+
         return context
+
+    def handle_ajax(self, request, *args, **kwargs):
+        if self.current_user_group == 'Supervisors':
+            selected_interviewer = request.POST.get('interviewer')
+            mean_duration = self.get_metrics_and_plots_generator(
+                ).get_05_interviews_duration_mean(
+                selected_interviewer=selected_interviewer).split(':')
+            total_duration = self.get_metrics_and_plots_generator(
+                ).get_06_interviews_duration_total(
+                selected_interviewer=selected_interviewer).split(':')
+            return JsonResponse({
+                'interviewer_selected': selected_interviewer,
+                'mean_duration_minutes': mean_duration[0],
+                'mean_duration_seconds': mean_duration[1],
+                'total_duration_minutes': total_duration[0],
+                'total_duration_seconds': total_duration[1],
+            })
+
